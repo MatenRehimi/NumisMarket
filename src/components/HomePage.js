@@ -4,7 +4,6 @@ import GridContainer from './GridContainer.js';
 import MetaTags from 'react-meta-tags';
 import Grid from '@material-ui/core/Grid';
 
-
 //https://www.youtube.com/watch?v=h99wHsM8pJE   <- linking to github and hosting
 export default function HomePage() {
 
