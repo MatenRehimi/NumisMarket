@@ -5,7 +5,7 @@ import * as serviceWorker from './serviceWorker';
 import { useRoutes } from "hookrouter";
 import Routes from './router'
 
-const maintenance = false;
+const maintenance = true;
 
 function App() {
   const routeResult = useRoutes(Routes)
