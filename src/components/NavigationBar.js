@@ -14,7 +14,7 @@ import MoreIcon from '@material-ui/icons/MoreVert';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 
 
-import {useStyles} from '../styles/NavigationBarStyle.js';
+import { useStyles } from '../styles/NavigationBarStyle.js';
 
 export default function NavigationBar(props) {
   const isHomePage = props.isHomePage;
@@ -79,7 +79,7 @@ export default function NavigationBar(props) {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <IconButton  color="inherit" href="/SignInPage">
+        <IconButton color="inherit" href="/SignInPage">
           <Typography>
             Register/Login
           </Typography>
@@ -108,59 +108,59 @@ export default function NavigationBar(props) {
             <MonetizationOnIcon className={classes.logo} />
             <Typography className={classes.title} variant="h4" noWrap>
               NumisMarket
-            </Typography>
+        </Typography>
           </IconButton>
           {isHomePage && (
-          <React.Fragment>
-            <div className={classes.search}>
-              <div className={classes.searchIcon}>
-                <SearchIcon />
-              </div>
-              <InputBase
-                placeholder="Search…"
-                classes={{
+            <React.Fragment>
+              <div className={classes.search}>
+                <div className={classes.searchIcon}>
+                  <SearchIcon />
+                </div>
+                <InputBase
+                  placeholder="Search…"
+                  classes={{
                     root: classes.inputRoot,
                     input: classes.inputInput,
-                }}
-                inputProps={{ 'aria-label': 'search' }}
-              />
-            </div>
-            <div className={classes.grow} />
-            <div className={classes.sectionDesktop}>
-                  <IconButton color="inherit" href="/SignInPage" onClick={() => console.log("pop")}>
-                    <Typography variant="h5" noWrap>
-                      Login or Register
+                  }}
+                  inputProps={{ 'aria-label': 'search' }}
+                />
+              </div>
+              <div className={classes.grow} />
+              <div className={classes.sectionDesktop}>
+                <IconButton color="inherit" href="/SignInPage" onClick={() => console.log("pop")}>
+                  <Typography variant="h5" noWrap>
+                    Login or Register
                     </Typography>
-                  </IconButton>
-              <IconButton  aria-label="show 3 items in basket" color="inherit">
-                Basket
+                </IconButton>
+                <IconButton aria-label="show 3 items in basket" color="inherit">
+                  Basket
                 <Badge badgeContent={3} color="secondary">
-                  <ShoppingBasketIcon  style={{ fill: "white" }} />
-                </Badge>
-              </IconButton>
-              <IconButton
-                edge="end"
-                aria-label="account of current user"
-                aria-controls={menuId}
-                aria-haspopup="true"
-                onClick={handleProfileMenuOpen}
-                color="inherit"
-              >
-                <AccountCircle />
-              </IconButton>
-            </div>
-            <div className={classes.sectionMobile}>
-              <IconButton
-                aria-label="show more"
-                aria-controls={mobileMenuId}
-                aria-haspopup="true"
-                onClick={handleMobileMenuOpen}
-                color="inherit"
-              >
-                <MoreIcon />
-              </IconButton>
-            </div>
-          </React.Fragment>
+                    <ShoppingBasketIcon style={{ fill: "white" }} />
+                  </Badge>
+                </IconButton>
+                <IconButton
+                  edge="end"
+                  aria-label="account of current user"
+                  aria-controls={menuId}
+                  aria-haspopup="true"
+                  onClick={handleProfileMenuOpen}
+                  color="inherit"
+                >
+                  <AccountCircle />
+                </IconButton>
+              </div>
+              <div className={classes.sectionMobile}>
+                <IconButton
+                  aria-label="show more"
+                  aria-controls={mobileMenuId}
+                  aria-haspopup="true"
+                  onClick={handleMobileMenuOpen}
+                  color="inherit"
+                >
+                  <MoreIcon />
+                </IconButton>
+              </div>
+            </React.Fragment>
           )}
         </Toolbar>
       </AppBar>

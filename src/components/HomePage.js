@@ -11,15 +11,15 @@ export default function HomePage() {
 
   return (
     <div >
-    <MetaTags>
-        <meta name="viewport" content="width=device-width, initial-scale=0.8"/>
-    </MetaTags>
-    <Grid container>
-      <Grid item>
-        <NavigationBar isHomePage={true}/>
+      <MetaTags>
+        <meta name="viewport" content="width=device-width, initial-scale=0.8" />
+      </MetaTags>
+      <Grid container>
+        <Grid item>
+          <NavigationBar isHomePage={true} />
           <GridContainer />
+        </Grid>
       </Grid>
-    </Grid>
     </div>
   );
 
