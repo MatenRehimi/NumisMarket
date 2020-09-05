@@ -1,13 +1,12 @@
-import React from 'react';
-import NavigationBar from './NavigationBar.js';
-import SignInPage from './SignInPage';
-
+import React from "react";
+import NavigationBar from "./NavigationBar.js";
+import SignInPage from "./SignInPage";
 
 export default function LoginOrRegisterPage(props) {
-  return(
+  return (
     <div>
-      <NavigationBar isHomePage={false}/>
-      <SignInPage/>
+      <NavigationBar isHomePage={false} />
+      <SignInPage />
     </div>
   );
 }

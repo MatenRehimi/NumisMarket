@@ -1,20 +1,19 @@
-import React from 'react';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
-import Badge from '@material-ui/core/Badge';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
-import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
-import SearchIcon from '@material-ui/icons/Search';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import MoreIcon from '@material-ui/icons/MoreVert';
-import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
+import React from "react";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import IconButton from "@material-ui/core/IconButton";
+import Typography from "@material-ui/core/Typography";
+import InputBase from "@material-ui/core/InputBase";
+import Badge from "@material-ui/core/Badge";
+import MenuItem from "@material-ui/core/MenuItem";
+import Menu from "@material-ui/core/Menu";
+import MonetizationOnIcon from "@material-ui/icons/MonetizationOn";
+import SearchIcon from "@material-ui/icons/Search";
+import AccountCircle from "@material-ui/icons/AccountCircle";
+import MoreIcon from "@material-ui/icons/MoreVert";
+import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 
-
-import { useStyles } from '../styles/NavigationBarStyle.js';
+import { useStyles } from "../styles/NavigationBarStyle.js";
 
 export default function NavigationBar(props) {
   const isHomePage = props.isHomePage;
@@ -50,15 +49,15 @@ export default function NavigationBar(props) {
   };
 
   //Creating the buttons and attaching the listeners
-  const menuId = 'primary-search-account-menu';
+  const menuId = "primary-search-account-menu";
   const renderMenu = (
     <Menu
       anchorEl={anchorEl}
       getContentAnchorEl={null}
-      anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+      anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
       id={menuId}
       keepMounted
-      transformOrigin={{ vertical: 'top', horizontal: 'center' }}
+      transformOrigin={{ vertical: "top", horizontal: "center" }}
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
@@ -67,22 +66,20 @@ export default function NavigationBar(props) {
     </Menu>
   );
 
-  const mobileMenuId = 'primary-search-account-menu-mobile';
+  const mobileMenuId = "primary-search-account-menu-mobile";
   const renderMobileMenu = (
     <Menu
       anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      anchorOrigin={{ vertical: "top", horizontal: "right" }}
       id={mobileMenuId}
       keepMounted
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+      transformOrigin={{ vertical: "top", horizontal: "right" }}
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
         <IconButton color="inherit" href="/SignInPage">
-          <Typography>
-            Register/Login
-          </Typography>
+          <Typography>Register/Login</Typography>
         </IconButton>
       </MenuItem>
 
@@ -108,7 +105,7 @@ export default function NavigationBar(props) {
             <MonetizationOnIcon className={classes.logo} />
             <Typography className={classes.title} variant="h4" noWrap>
               NumisMarket
-        </Typography>
+            </Typography>
           </IconButton>
           {isHomePage && (
             <React.Fragment>
@@ -122,19 +119,23 @@ export default function NavigationBar(props) {
                     root: classes.inputRoot,
                     input: classes.inputInput,
                   }}
-                  inputProps={{ 'aria-label': 'search' }}
+                  inputProps={{ "aria-label": "search" }}
                 />
               </div>
               <div className={classes.grow} />
               <div className={classes.sectionDesktop}>
-                <IconButton color="inherit" href="/SignInPage" onClick={() => console.log("pop")}>
+                <IconButton
+                  color="inherit"
+                  href="/SignInPage"
+                  onClick={() => console.log("pop")}
+                >
                   <Typography variant="h5" noWrap>
                     Login or Register
-                    </Typography>
+                  </Typography>
                 </IconButton>
                 <IconButton aria-label="show 3 items in basket" color="inherit">
                   Basket
-                <Badge badgeContent={3} color="secondary">
+                  <Badge badgeContent={3} color="secondary">
                     <ShoppingBasketIcon style={{ fill: "white" }} />
                   </Badge>
                 </IconButton>
