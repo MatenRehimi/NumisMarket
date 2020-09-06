@@ -5,17 +5,12 @@ import * as serviceWorker from "./serviceWorker";
 import { useRoutes } from "hookrouter";
 import Routes from "./router";
 
-const maintenance = true;
-
 function App() {
   const routeResult = useRoutes(Routes);
   return routeResult;
 }
-if (maintenance) {
-  ReactDOM.render(null, document.getElementById("root"));
-} else {
-  ReactDOM.render(<App />, document.getElementById("root"));
-}
+
+ReactDOM.render(<App />, document.getElementById("root"));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

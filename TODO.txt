@@ -1,0 +1,7 @@
+1) Make a production branch (master?) and a separate branch for changing the website. 
+Production branch will be viewed in the actual website.
+2) Complete mobile menu on homepage (more section)
+3) Implement the shopping basket.
+3.1) Record items in a JSON file.
+3.2) Make the shopping basket page.
+3.3) 
