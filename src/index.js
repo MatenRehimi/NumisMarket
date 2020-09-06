@@ -7,6 +7,7 @@ import Routes from "./router";
 
 function App() {
   const routeResult = useRoutes(Routes);
+  console.log("hello");
   return routeResult;
 }
 
