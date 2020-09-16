@@ -78,6 +78,7 @@ export default function NavigationBar(props) {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
+        {console.log("here")}
         <IconButton color="inherit" href="/SignInPage">
           <Typography>Register/Login</Typography>
         </IconButton>
@@ -165,8 +166,8 @@ export default function NavigationBar(props) {
           )}
         </Toolbar>
       </AppBar>
-      {renderMobileMenu}
-      {renderMenu}
+      {isHomePage ? (window.innerWidth <= 958 ? renderMobileMenu : null) : null}
+      {isHomePage ? renderMenu : null}
     </div>
   );
 }

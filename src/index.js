@@ -1,13 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import * as serviceWorker from "./serviceWorker";
+import AuthContextProvider from "./context/AuthContextProvider";
 
 import { useRoutes } from "hookrouter";
 import Routes from "./router";
 
 function App() {
   const routeResult = useRoutes(Routes);
-  return routeResult;
+  return <AuthContextProvider>{routeResult}</AuthContextProvider>;
 }
 
 ReactDOM.render(<App />, document.getElementById("root"));

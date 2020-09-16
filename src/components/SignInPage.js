@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useState, useEffect } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -12,24 +12,47 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import NavigationBar from "./NavigationBar";
+import AuthContext from "../context/AuthContext";
+import { navigate } from "hookrouter";
 
 import { useStyles } from "../styles/SignInPageStyle.js";
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="http://localhost:3000/">
-        NumisMarket
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+const Copyright = (
+  <Typography variant="body2" color="textSecondary" align="center">
+    {"Copyright © "}
+    <Link color="inherit" href="http://localhost:3000/">
+      NumisMarket
+    </Link>{" "}
+    {new Date().getFullYear()}
+    {"."}
+  </Typography>
+);
 
 export default function SignInPage(props) {
   const classes = useStyles(props);
+  const context = useContext(AuthContext);
+
+  const [emailState, setEmailState] = useState("");
+  const [passwordState, setPasswordState] = useState("");
+
+  useEffect(() => {
+    console.log("effect");
+    context.token = "";
+    if (context.token) {
+      navigate("/");
+    }
+    if (context.error) {
+      console.log("Wrong credentials");
+    }
+  }, [context.token, context.error]);
+
+  function handleSubmit(e) {
+    console.log("pop");
+    e.preventDefault();
+    context.login(emailState, passwordState);
+  }
+
+  console.log(props);
 
   return (
     <div>
@@ -43,7 +66,7 @@ export default function SignInPage(props) {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <form className={classes.form} noValidate>
+          <form className={classes.form} onSubmit={handleSubmit}>
             <TextField
               variant="outlined"
               margin="normal"
@@ -54,6 +77,8 @@ export default function SignInPage(props) {
               name="email"
               autoComplete="email"
               autoFocus
+              value={emailState}
+              onChange={(e) => setEmailState(e.target.value)}
             />
             <TextField
               variant="outlined"
@@ -65,6 +90,8 @@ export default function SignInPage(props) {
               type="password"
               id="password"
               autoComplete="current-password"
+              value={passwordState}
+              onChange={(e) => setPasswordState(e.target.value)}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
@@ -93,9 +120,7 @@ export default function SignInPage(props) {
             </Grid>
           </form>
         </div>
-        <Box mt={8}>
-          <Copyright />
-        </Box>
+        <Box mt={8}>{Copyright}</Box>
       </Container>
     </div>
   );
