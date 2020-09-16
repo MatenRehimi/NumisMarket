@@ -167,6 +167,7 @@ export default function NavigationBar(props) {
         </Toolbar>
       </AppBar>
       {isHomePage ? (window.innerWidth <= 958 ? renderMobileMenu : null) : null}
+      {isHomePage ? (window.innerWidth > 958 ? renderMenu : null) : null}
       {isHomePage ? renderMenu : null}
     </div>
   );
