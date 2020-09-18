@@ -29,6 +29,7 @@ const Copyright = (
 );
 
 export default function SignInPage(props) {
+  console.log("render");
   const classes = useStyles(props);
   const context = useContext(AuthContext);
 
@@ -37,12 +38,12 @@ export default function SignInPage(props) {
 
   useEffect(() => {
     console.log("effect");
-    context.token = "";
+    console.log(context.token);
     if (context.token) {
       navigate("/");
     }
     if (context.error) {
-      console.log("Wrong credentials");
+      console.log(context.error);
     }
   }, [context.token, context.error]);
 
@@ -51,8 +52,6 @@ export default function SignInPage(props) {
     e.preventDefault();
     context.login(emailState, passwordState);
   }
-
-  console.log(props);
 
   return (
     <div>

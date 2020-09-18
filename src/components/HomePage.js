@@ -1,6 +1,6 @@
 import React from "react";
 import NavigationBar from "./NavigationBar.js";
-import GridContainer from "./GridContainer.js";
+import ProductGrid from "./ProductGrid.js";
 import MetaTags from "react-meta-tags";
 import Grid from "@material-ui/core/Grid";
 
@@ -12,11 +12,9 @@ export default function HomePage() {
       <MetaTags>
         <meta name="viewport" content="width=device-width, initial-scale=0.8" />
       </MetaTags>
-      <Grid container>
-        <Grid item>
-          <NavigationBar isHomePage={true} />
-          <GridContainer />
-        </Grid>
+      <Grid container item>
+        <NavigationBar isHomePage={true} />
+        <ProductGrid />
       </Grid>
     </div>
   );

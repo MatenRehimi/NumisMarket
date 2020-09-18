@@ -1,28 +1,24 @@
 import React, { useState } from "react";
 import AuthContext from "./AuthContext";
 import { useCookies } from "react-cookie";
+import cryptoRandomString from "crypto-random-string";
 
 export default function AuthContextProvider(props) {
   const [cookies, setCookie] = useCookies(["token"]);
 
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
   const loginFunction = (email, password) => {
-    console.log("1");
-    console.log(password);
-    setLoading(true);
-
     setTimeout(() => {
       if (password !== "123") {
-        console.log("2");
         setError("Wrong credentials");
-        console.log("3");
       } else {
-        setCookie("token", "jwtencodedtoken$123");
+        setCookie(
+          "token",
+          cryptoRandomString({ length: 15, type: "alphanumeric" })
+        );
         setError("");
       }
-      //  setLoading(false);
     }, 1000);
   };
 
@@ -31,7 +27,6 @@ export default function AuthContextProvider(props) {
       value={{
         token: cookies.token,
         error,
-        loading,
         login: loginFunction,
       }}
     >

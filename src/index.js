@@ -2,13 +2,19 @@ import React from "react";
 import ReactDOM from "react-dom";
 import * as serviceWorker from "./serviceWorker";
 import AuthContextProvider from "./context/AuthContextProvider";
+import { ProductProvider } from "./context/ProductContext";
 
 import { useRoutes } from "hookrouter";
 import Routes from "./router";
 
 function App() {
+  document.title = "Numis Market";
   const routeResult = useRoutes(Routes);
-  return <AuthContextProvider>{routeResult}</AuthContextProvider>;
+  return (
+    <AuthContextProvider>
+      <ProductProvider>{routeResult}</ProductProvider>
+    </AuthContextProvider>
+  );
 }
 
 ReactDOM.render(<App />, document.getElementById("root"));

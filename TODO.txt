@@ -1,7 +1,11 @@
-2) Complete mobile menu on homepage (more section)
-3) Implement the shopping basket.
-3.1) Record items in a JSON file.
-3.2) Make the shopping basket page.
-3.3) 
+1) Are cookies safe? https://www.taniarascia.com/full-stack-cookies-localstorage-react-express/
+https://hasura.io/blog/best-practices-of-using-jwt-with-graphql/
+https://www.reddit.com/r/reactjs/comments/ebbzmz/react_js_and_jwt_client_side_authentication/
+1) Do backend at the end. Make basket work rn.
+2) Create a backend of express.
+3) Complete mobile menu on homepage (more section)
+4) Implement the shopping basket.
+4.1) Record items in a JSON file.
+5.2) Make the shopping basket page.
 
 
