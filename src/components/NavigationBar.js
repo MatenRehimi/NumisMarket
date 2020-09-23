@@ -12,6 +12,8 @@ import SearchIcon from "@material-ui/icons/Search";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
+import { BasketConsumer } from "../context/BasketContext";
+import { navigate } from "hookrouter";
 
 import { useStyles } from "../styles/NavigationBarStyle.js";
 
@@ -78,7 +80,7 @@ export default function NavigationBar(props) {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <IconButton color="inherit" href="/SignInPage">
+        <IconButton color="inherit" onClick={() => navigate("/SignInPage")}>
           <Typography>Register/Login</Typography>
         </IconButton>
       </MenuItem>
@@ -101,7 +103,7 @@ export default function NavigationBar(props) {
     <div className={classes.grow}>
       <AppBar className={classes.appBarStyle} color="primary" position="static">
         <Toolbar>
-          <IconButton color="inherit" href="/">
+          <IconButton onClick={() => navigate("/")} color="inherit">
             <MonetizationOnIcon className={classes.logo} />
             <Typography className={classes.title} variant="h4" noWrap>
               NumisMarket
@@ -127,8 +129,7 @@ export default function NavigationBar(props) {
               <div className={classes.sectionDesktop}>
                 <IconButton
                   color="inherit"
-                  href="/SignInPage"
-                  onClick={() => console.log("pop")}
+                  onClick={() => navigate("/SignInPage")}
                 >
                   <Typography variant="h5" noWrap>
                     Login or Register
@@ -136,9 +137,19 @@ export default function NavigationBar(props) {
                 </IconButton>
                 <IconButton aria-label="show 3 items in basket" color="inherit">
                   Basket
-                  <Badge badgeContent={3} color="secondary">
-                    <ShoppingBasketIcon style={{ fill: "white" }} />
-                  </Badge>
+                  <BasketConsumer>
+                    {(value) => {
+                      console.log(value.getBasketSize());
+                      return (
+                        <Badge
+                          badgeContent={value.getBasketSize()}
+                          color="secondary"
+                        >
+                          <ShoppingBasketIcon style={{ fill: "white" }} />
+                        </Badge>
+                      );
+                    }}
+                  </BasketConsumer>
                 </IconButton>
                 <IconButton
                   edge="end"

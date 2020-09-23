@@ -4,7 +4,7 @@ export const storeProducts = [
     title: "£2 2007 Act of Union",
     img: "image/coin.jpg",
     price: 10.0,
-    quantity: 0,
+    quantity: 5,
     company: "GOOGLE",
     info: "A black phone",
     inCart: false,
@@ -16,7 +16,7 @@ export const storeProducts = [
     title: "£1 Capital cities-Edinburgh 2011",
     img: "image/coin.jpg",
     price: 1.0,
-    quantity: 0,
+    quantity: 4,
     company: "SAMSUNG",
     info:
       "Lorem ipsum dolor amet offal butcher quinoa sustainable gastropub, echo park actually green juice sriracha paleo. Brooklyn sriracha semiotics, DIY coloring book mixtape craft beer sartorial hella blue bottle. Tote bag wolf authentic try-hard put a bird on it mumblecore. Unicorn lumbersexual master cleanse blog hella VHS, vaporware sartorial church-key cardigan single-origin coffee lo-fi organic asymmetrical. Taxidermy semiotics celiac stumptown scenester normcore, ethical helvetica photo booth gentrify.",
@@ -29,7 +29,7 @@ export const storeProducts = [
     title: "2018 Flopsy Bunny",
     img: "image/coin.jpg",
     price: 8.95,
-    quantity: 0,
+    quantity: 7,
     company: "SAMSUNG",
     info:
       "Lorem ipsum dolor amet offal butcher quinoa sustainable gastropub, echo park actually green juice sriracha paleo. Brooklyn sriracha semiotics, DIY coloring book mixtape craft beer sartorial hella blue bottle. Tote bag wolf authentic try-hard put a bird on it mumblecore. Unicorn lumbersexual master cleanse blog hella VHS, vaporware sartorial church-key cardigan single-origin coffee lo-fi organic asymmetrical. Taxidermy semiotics celiac stumptown scenester normcore, ethical helvetica photo booth gentrify.",
@@ -42,7 +42,7 @@ export const storeProducts = [
     title: "2018 Mrs Titlemouse",
     img: "image/coin.jpg",
     price: 5.95,
-    quantity: 0,
+    quantity: 2,
     company: "SAMSUNG",
     info:
       "Lorem ipsum dolor amet offal butcher quinoa sustainable gastropub, echo park actually green juice sriracha paleo. Brooklyn sriracha semiotics, DIY coloring book mixtape craft beer sartorial hella blue bottle. Tote bag wolf authentic try-hard put a bird on it mumblecore. Unicorn lumbersexual master cleanse blog hella VHS, vaporware sartorial church-key cardigan single-origin coffee lo-fi organic asymmetrical. Taxidermy semiotics celiac stumptown scenester normcore, ethical helvetica photo booth gentrify.",
@@ -103,6 +103,8 @@ export const storeProducts = [
     total: 0,
   },
 ];
+
+export const cart = [];
 
 export const detailProduct = {
   id: 1,

@@ -5,6 +5,7 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
+import { navigate } from "hookrouter";
 
 import { useStyles } from "../styles/ProductStyle.js";
 
@@ -22,7 +23,7 @@ export default function Product(props) {
           <Grid item xs={12}>
             <ButtonBase
               className={classes.image}
-              href={"/ProductDetailsPage/" + id}
+              onClick={() => navigate("/ProductDetailsPage/" + id)}
             >
               <img className={classes.img} alt={title} src={"/" + img} />
             </ButtonBase>

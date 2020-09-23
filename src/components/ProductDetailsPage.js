@@ -6,16 +6,28 @@ import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import MuiAlert from "@material-ui/lab/Alert";
 import { BasketConsumer } from "../context/BasketContext";
+import { navigate } from "hookrouter";
 
 import { useStyles } from "../styles/ProductDetailsPageStyle.js";
 import { Grid, Button, Snackbar } from "@material-ui/core";
 
 export default function ProductDetailsPage(props) {
   const [open, setOpen] = useState(false);
+  const [severity, setSeverity] = useState("success");
   const classes = useStyles(props);
   const product = storeProducts.find(
     (item) => item.id === parseInt(props.productID)
   );
+
+  function handleTrueClick() {
+    setOpen(true);
+    setSeverity("success");
+  }
+
+  function handleFalseClick() {
+    setOpen(true);
+    setSeverity("error");
+  }
 
   if (product) {
     const { title, img, price, info } = product;
@@ -54,8 +66,9 @@ export default function ProductDetailsPage(props) {
                           color="primary"
                           variant="contained"
                           onClick={() => {
-                            setOpen(true);
-                            value.addToCart(product);
+                            value.addToCart(product)
+                              ? handleTrueClick()
+                              : handleFalseClick();
                           }}
                         >
                           Add to basket
@@ -64,7 +77,7 @@ export default function ProductDetailsPage(props) {
                     }}
                   </BasketConsumer>
                   <Snackbar
-                    autoHideDuration={1000}
+                    autoHideDuration={1250}
                     message="Item has been added"
                     open={open}
                     onClose={() => setOpen(false)}
@@ -73,9 +86,11 @@ export default function ProductDetailsPage(props) {
                       elevation={6}
                       variant="filled"
                       onClose={() => setOpen(false)}
-                      severity="success"
+                      severity={severity}
                     >
-                      Added item to Basket!
+                      {severity === "success"
+                        ? "Added item to Basket!"
+                        : "No stock remaining!"}
                     </MuiAlert>
                   </Snackbar>
 
@@ -85,7 +100,7 @@ export default function ProductDetailsPage(props) {
                     background="#2278CF"
                     color="primary"
                     variant="contained"
-                    href="/"
+                    onClick={() => navigate("/")}
                   >
                     Back to products
                   </Button>
