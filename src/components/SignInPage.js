@@ -12,7 +12,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import NavigationBar from "./NavigationBar";
-import AuthContext from "../context/AuthContext";
+import { AuthContext } from "../context/AuthContext";
 import { navigate } from "hookrouter";
 
 import { useStyles } from "../styles/SignInPageStyle.js";

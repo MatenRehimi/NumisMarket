@@ -106,6 +106,7 @@ export default function NavigationBar(props) {
             <Typography className={classes.title} variant="h4" noWrap>
               NumisMarket
             </Typography>
+            {/* <img src={"/NumisMarket logo.png"} width={"220"} height={"70"} /> */}
           </IconButton>
           {isHomePage && (
             <React.Fragment>

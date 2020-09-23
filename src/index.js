@@ -1,19 +1,20 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import * as serviceWorker from "./serviceWorker";
-import AuthContextProvider from "./context/AuthContextProvider";
-import { ProductProvider } from "./context/ProductContext";
-
+import { AuthProvider } from "./context/AuthContext";
+import { BasketProvider } from "./context/BasketContext";
 import { useRoutes } from "hookrouter";
 import Routes from "./router";
+import PageNotFound from "./components/NotFoundPage";
 
 function App() {
   document.title = "Numis Market";
+  document.body.style.margin = 0;
   const routeResult = useRoutes(Routes);
   return (
-    <AuthContextProvider>
-      <ProductProvider>{routeResult}</ProductProvider>
-    </AuthContextProvider>
+    <AuthProvider>
+      <BasketProvider>{routeResult || <PageNotFound />}</BasketProvider>
+    </AuthProvider>
   );
 }
 

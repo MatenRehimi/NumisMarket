@@ -1,5 +1,40 @@
-import { createContext } from "react";
+import React, { useState, createContext } from "react";
+import { useCookies } from "react-cookie";
+import cryptoRandomString from "crypto-random-string";
 
-const authContext = createContext();
+const AuthContext = createContext();
 
-export default authContext;
+function AuthProvider(props) {
+  const [cookies, setCookie] = useCookies(["token"]);
+
+  const [error, setError] = useState("");
+
+  const loginFunction = (email, password) => {
+    setTimeout(() => {
+      if (password !== "123") {
+        setError("Wrong credentials");
+      } else {
+        setCookie(
+          "token",
+          cryptoRandomString({ length: 15, type: "alphanumeric" })
+        );
+        setError("");
+      }
+    }, 1000);
+  };
+
+  return (
+    <AuthContext.Provider
+      value={{
+        token: cookies.token,
+        error,
+        login: loginFunction,
+      }}
+    >
+      {props.children}
+    </AuthContext.Provider>
+  );
+}
+
+const AuthConsumer = AuthContext.Consumer;
+export { AuthProvider, AuthConsumer, AuthContext };
