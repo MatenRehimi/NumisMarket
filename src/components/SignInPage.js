@@ -20,7 +20,7 @@ import { useStyles } from "../styles/SignInPageStyle.js";
 const Copyright = (
   <Typography variant="body2" color="textSecondary" align="center">
     {"Copyright © "}
-    <A color="inherit" href="http://localhost:3000/">
+    <A color="inherit" href="/">
       NumisMarket
     </A>{" "}
     {new Date().getFullYear()}

@@ -5,13 +5,13 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
-import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import NavigationBar from "./NavigationBar";
+import { A } from "hookrouter";
 
 import { useStyles } from "../styles/SignUpPageStyle.js";
 
@@ -19,9 +19,9 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
-      <Link color="inherit" href="http://localhost:3000/">
+      <A color="inherit" href="http://localhost:3000/">
         NumisMarket
-      </Link>{" "}
+      </A>{" "}
       {new Date().getFullYear()}
       {"."}
     </Typography>
@@ -111,9 +111,9 @@ export default function SignUpPage() {
             </Button>
             <Grid container justify="flex-end">
               <Grid item>
-                <Link href="/SignInPage" variant="body2">
+                <A href="/SignInPage" variant="body2">
                   Already have an account? Sign in
-                </Link>
+                </A>
               </Grid>
             </Grid>
           </form>
