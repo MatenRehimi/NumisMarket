@@ -3,9 +3,6 @@ const BasketContext = createContext();
 
 function BasketProvider(props) {
   const [cart, setCart] = useState([]);
-  const [cartSubTotal, setCartSubTotal] = useState(0);
-  const [cartTax, setCartTax] = useState(0);
-  const [cartTotal, setCartTotal] = useState(0);
 
   useEffect(() => {
     console.log("effect");
@@ -19,9 +16,7 @@ function BasketProvider(props) {
   }
 
   return (
-    <BasketContext.Provider
-      value={{ cart, cartSubTotal, cartTax, cartTotal, addToCart }}
-    >
+    <BasketContext.Provider value={{ cart, addToCart }}>
       {props.children}
     </BasketContext.Provider>
   );

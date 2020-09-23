@@ -2,15 +2,13 @@ import React, { useState } from "react";
 import { storeProducts } from "../data.js";
 import NavigationBar from "./NavigationBar.js";
 import NotFoundPage from "./NotFoundPage.js";
-import Zoom from "react-img-zoom";
-import { BrowserView, MobileView } from "react-device-detect";
 import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import MuiAlert from "@material-ui/lab/Alert";
 import { BasketConsumer } from "../context/BasketContext";
 
 import { useStyles } from "../styles/ProductDetailsPageStyle.js";
-import { Grid, Button, Snackbar, TextField } from "@material-ui/core";
+import { Grid, Button, Snackbar } from "@material-ui/core";
 
 export default function ProductDetailsPage(props) {
   const [open, setOpen] = useState(false);
@@ -20,7 +18,7 @@ export default function ProductDetailsPage(props) {
   );
 
   if (product) {
-    const { id, title, img, price, company, info } = product;
+    const { title, img, price, info } = product;
     return (
       <div>
         <NavigationBar isHomePage={false} />

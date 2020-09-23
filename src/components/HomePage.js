@@ -3,7 +3,6 @@ import NavigationBar from "./NavigationBar.js";
 import ProductGrid from "./ProductGrid.js";
 import MetaTags from "react-meta-tags";
 import Grid from "@material-ui/core/Grid";
-import { Container, CssBaseline } from "@material-ui/core";
 
 export default function HomePage() {
   return (

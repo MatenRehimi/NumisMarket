@@ -7,11 +7,10 @@ import ButtonBase from "@material-ui/core/ButtonBase";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 
 import { useStyles } from "../styles/ProductStyle.js";
-import { BasketConsumer } from "../context/BasketContext.js";
 
 export default function Product(props) {
   const classes = useStyles(props);
-  const { id, title, img, price, inCart } = props.product;
+  const { id, title, img, price } = props.product;
 
   return (
     <Grid item xs={6} md={4} lg={3}>
