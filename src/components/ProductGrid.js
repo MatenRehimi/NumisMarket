@@ -1,7 +1,7 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
 import Product from "./Product.js";
-import { useStyles } from "../styles/ProductGridStyle.js";
+import { useStyles } from "./styles/ProductGridStyle.js";
 import { storeProducts } from "../data.js";
 
 export default function ProductGrid(props) {

@@ -15,7 +15,7 @@ import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 import { BasketConsumer } from "../context/BasketContext";
 import { navigate } from "hookrouter";
 
-import { useStyles } from "../styles/NavigationBarStyle.js";
+import { useStyles } from "./styles/NavigationBarStyle";
 
 export default function NavigationBar(props) {
   const isHomePage = props.isHomePage;
@@ -80,7 +80,7 @@ export default function NavigationBar(props) {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <IconButton color="inherit" onClick={() => navigate("/SignInPage")}>
+        <IconButton color="inherit" onClick={() => navigate("/signInPage")}>
           <Typography>Register/Login</Typography>
         </IconButton>
       </MenuItem>
@@ -129,17 +129,20 @@ export default function NavigationBar(props) {
               <div className={classes.sectionDesktop}>
                 <IconButton
                   color="inherit"
-                  onClick={() => navigate("/SignInPage")}
+                  onClick={() => navigate("/signInPage")}
                 >
                   <Typography variant="h5" noWrap>
                     Login or Register
                   </Typography>
                 </IconButton>
-                <IconButton aria-label="show 3 items in basket" color="inherit">
+                <IconButton
+                  onClick={() => navigate("/basketPage")}
+                  aria-label="show 3 items in basket"
+                  color="inherit"
+                >
                   Basket
                   <BasketConsumer>
                     {(value) => {
-                      console.log(value.getBasketSize());
                       return (
                         <Badge
                           badgeContent={value.getBasketSize()}
