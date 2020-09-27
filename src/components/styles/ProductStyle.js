@@ -1,31 +1,31 @@
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   image: {
-    maxWidth: '100%',
-    width: '100%',
-
+    maxWidth: "100%",
+    width: "100%",
   },
   paper: {
     padding: theme.spacing(2),
-    textAlign: 'center',
+    textAlign: "center",
     color: theme.palette.text.secondary,
-    height:"90%"
+    height: "90%",
   },
   img: {
-    margin: 'auto',
-    display: 'block',
-    maxWidth: '100%',
-    maxHeight: '100%',
+    margin: "auto",
+    display: "block",
+    maxWidth: "100%",
+    maxHeight: "100%",
   },
   mainItem: {
-    height:300,
-    width:351
+    height: 300,
+    width: 351,
   },
   shoppingBasketIcon: {
-    marginLeft: theme.spacing(0),
-    height:20
+    height: 30,
+    marginTop: theme.spacing(0.4),
+    marginBottom: "auto",
   },
 }));
 
-export {useStyles}
+export { useStyles };

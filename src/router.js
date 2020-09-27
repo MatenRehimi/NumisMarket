@@ -1,14 +1,16 @@
 import React from "react";
-import HomePage from "./components/HomePage.js";
-import SignInPage from "./components/SignInPage.js";
-import SignUpPage from "./components/SignUpPage.js";
-import ProductDetailsPage from "./components/ProductDetailsPage.js";
+import HomePage from "./pages/HomePage.js";
+import SignInPage from "./pages/SignInPage.js";
+import SignUpPage from "./pages/SignUpPage.js";
+import ProductDetailsPage from "./pages/ProductDetailsPage.js";
+import BasketPage from "./pages/BasketPage.js";
 
 const routes = {
   "/": () => <HomePage />,
-  "/SignInPage": () => <SignInPage />,
-  "/SignUpPage": () => <SignUpPage />,
-  "/ProductDetailsPage/:id": ({ id }) => <ProductDetailsPage productID={id} />,
+  "/signInPage": () => <SignInPage />,
+  "/signUpPage": () => <SignUpPage />,
+  "/productDetailsPage/:id": ({ id }) => <ProductDetailsPage productID={id} />,
+  "/basketPage": () => <BasketPage />,
 };
 
 export default routes;

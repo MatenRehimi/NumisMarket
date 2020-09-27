@@ -5,7 +5,7 @@ import { AuthProvider } from "./context/AuthContext";
 import { BasketProvider } from "./context/BasketContext";
 import { useRoutes } from "hookrouter";
 import Routes from "./router";
-import PageNotFound from "./components/NotFoundPage";
+import PageNotFound from "./pages/NotFoundPage";
 
 function App() {
   document.title = "Numis Market";

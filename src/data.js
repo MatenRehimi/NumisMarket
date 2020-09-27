@@ -3,19 +3,20 @@ export const storeProducts = [
     id: 1,
     title: "£2 2007 Act of Union",
     img: "image/coin.jpg",
-    price: 10.0,
+    price: (10.0).toFixed(2),
     quantity: 5,
     company: "GOOGLE",
     info: "A black phone",
     inCart: false,
     count: 0,
     total: 0,
+    numberInBasket: 0,
   },
   {
     id: 2,
     title: "£1 Capital cities-Edinburgh 2011",
     img: "image/coin.jpg",
-    price: 1.0,
+    price: (1.0).toFixed(2),
     quantity: 4,
     company: "SAMSUNG",
     info:
@@ -23,6 +24,7 @@ export const storeProducts = [
     inCart: false,
     count: 0,
     total: 0,
+    numberInBasket: 0,
   },
   {
     id: 3,
@@ -36,6 +38,7 @@ export const storeProducts = [
     inCart: false,
     count: 0,
     total: 0,
+    numberInBasket: 0,
   },
   {
     id: 4,
@@ -49,12 +52,13 @@ export const storeProducts = [
     inCart: false,
     count: 0,
     total: 0,
+    numberInBasket: 0,
   },
   {
     id: 5,
     title: "£2 2017 Aviation",
     img: "image/coin.jpg",
-    price: 22.0,
+    price: (22.0).toFixed(2),
     quantity: 0,
     company: "SAMSUNG",
     info:
@@ -62,6 +66,7 @@ export const storeProducts = [
     inCart: false,
     count: 0,
     total: 0,
+    numberInBasket: 0,
   },
   {
     id: 6,
@@ -75,12 +80,13 @@ export const storeProducts = [
     inCart: false,
     count: 0,
     total: 0,
+    numberInBasket: 0,
   },
   {
     id: 7,
     title: "£2 2013 London underground roundEL",
     img: "image/coin.jpg",
-    price: 7.5,
+    price: (7.5).toFixed(2),
     quantity: 0,
     company: "SAMSUNG",
     info:
@@ -88,12 +94,13 @@ export const storeProducts = [
     inCart: false,
     count: 0,
     total: 0,
+    numberInBasket: 0,
   },
   {
     id: 8,
     title: "2016 Great Fire of London",
     img: "image/coin.jpg",
-    price: 9.5,
+    price: (9.5).toFixed(2),
     quantity: 0,
     company: "SAMSUNG",
     info:
@@ -101,21 +108,6 @@ export const storeProducts = [
     inCart: false,
     count: 0,
     total: 0,
+    numberInBasket: 0,
   },
 ];
-
-export const cart = [];
-
-export const detailProduct = {
-  id: 1,
-  title: "Google Pixel - Black asd",
-  img: "img/product-1.png",
-  price: 10.0,
-  quantity: 0,
-  company: "google",
-  info:
-    "Lorem ipsum dolor amet offal butcher quinoa sustainable gastropub, echo park actually green juice sriracha paleo. Brooklyn sriracha semiotics, DIY coloring book mixtape craft beer sartorial hella blue bottle. Tote bag wolf authentic try-hard put a bird on it mumblecore. Unicorn lumbersexual master cleanse blog hella VHS, vaporware sartorial church-key cardigan single-origin coffee lo-fi organic asymmetrical. Taxidermy semiotics celiac stumptown scenester normcore, ethical helvetica photo booth gentrify.",
-  inCart: false,
-  count: 0,
-  total: 0,
-};

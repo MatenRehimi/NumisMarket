@@ -1,33 +1,47 @@
 import React, { useState, useEffect, createContext } from "react";
+
 const BasketContext = createContext();
 
 function BasketProvider(props) {
   console.log("basketcontext render");
-  const [cart, setCart] = useState([]);
+  const [basket, setBasket] = useState([]);
+  console.log(basket);
 
   useEffect(() => {
     console.log("effect");
-    console.log("cart:" + cart);
-    console.log("cartSubTotal:");
-  }, [cart]);
+    console.log(basket);
+    console.log("basketSubTotal:");
+  }, [basket]);
 
-  function addToCart(product) {
-    if (parseInt(product.quantity) === 0) {
-      console.log("is ZERO");
+  function addToBasket(product) {
+    if (
+      parseInt(product.quantity) === 0 ||
+      parseInt(product.numberInBasket) >= parseInt(product.quantity)
+    ) {
       return false;
     }
-    console.log(product);
-    console.log(product.quantity);
-    setCart([...cart, product]);
+    product.numberInBasket = product.numberInBasket + 1;
+    if (basket.find((item) => item.id === parseInt(product.id))) {
+      setBasket([...basket]);
+    } else {
+      setBasket([...basket, product]);
+    }
     return true;
   }
 
+  function removeFromBasket(product) {
+    product.numberInBasket = 0;
+    setBasket(basket.filter((item) => item.id !== parseInt(product.id)));
+  }
+
   function getBasketSize() {
-    return cart.length;
+    return basket.reduce((total, item) => total + item.numberInBasket, 0);
   }
 
   return (
-    <BasketContext.Provider value={{ cart, addToCart, getBasketSize }}>
+    <BasketContext.Provider
+      value={{ basket, addToBasket, getBasketSize, removeFromBasket }}
+    >
       {props.children}
     </BasketContext.Provider>
   );

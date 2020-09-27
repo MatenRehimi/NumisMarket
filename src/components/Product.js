@@ -11,6 +11,7 @@ import { Snackbar } from "@material-ui/core";
 
 import { useStyles } from "./styles/ProductStyle.js";
 import { BasketConsumer } from "../context/BasketContext.js";
+import StyledButton from "./StyledButton.js";
 
 export default function Product(props) {
   const classes = useStyles(props);
@@ -51,20 +52,34 @@ export default function Product(props) {
               <BasketConsumer>
                 {(value) => {
                   return (
-                    <ButtonBase
+                    <StyledButton
                       onClick={() => {
                         value.addToBasket(props.product)
                           ? handleTrueClick()
                           : handleFalseClick();
                       }}
                     >
-                      <Typography>
-                        Add to basket
-                        <ShoppingBasketIcon
-                          className={classes.shoppingBasketIcon}
-                        />
-                      </Typography>
-                    </ButtonBase>
+                      <Grid item container direction="row">
+                        <Grid
+                          item
+                          style={{ marginTop: "auto", marginBottom: "auto" }}
+                          xs={10}
+                        >
+                          <Typography
+                            style={{
+                              fontSize: 13,
+                            }}
+                          >
+                            Add to basket
+                          </Typography>
+                        </Grid>
+                        <Grid item xs={2}>
+                          <ShoppingBasketIcon
+                            className={classes.shoppingBasketIcon}
+                          />
+                        </Grid>
+                      </Grid>
+                    </StyledButton>
                   );
                 }}
               </BasketConsumer>

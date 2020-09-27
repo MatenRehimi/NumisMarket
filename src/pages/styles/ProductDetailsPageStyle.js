@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
 
   addBasketButton: {
     marginRight: theme.spacing(1),
-    marginBottom: theme.spacing(2),
+    marginBottom: theme.spacing(3),
   },
   backToProductsButton: {
     marginRight: theme.spacing(1),
