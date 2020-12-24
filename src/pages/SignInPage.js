@@ -39,6 +39,8 @@ export default function SignInPage(props) {
   useEffect(() => {
     console.log("effect");
     console.log(context.token);
+    console.log("fetch")
+
     if (context.token) {
       navigate("/");
     }

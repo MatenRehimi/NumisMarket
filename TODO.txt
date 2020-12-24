@@ -2,6 +2,7 @@
 1.1) Create item page. DONE
 1.2) Store cart in session or DB https://stackoverflow.com/questions/2827764/ecommerceshopping-cartwhere-should-i-store-shopping-cart-data-in-session-or#:~:text=As%20long%20as%20the%20client,table%20utilizing%20an%20AJAX%20call.
 1.3) Create basket page
+1.4) Make it work on phones
 2) Create a backend using express or node.js (preferably node as express is built on top of it).
 3) Create databases and link to backend.
 4) Link backend to frontend.
