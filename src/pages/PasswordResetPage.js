@@ -3,9 +3,7 @@ import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-import { A, navigate } from "hookrouter";
+import { A} from "hookrouter";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
@@ -18,6 +16,7 @@ import MuiAlert from "@material-ui/lab/Alert";
 
 import { useStyles } from "./styles/SignInPageStyle.js";
 
+
 const Copyright = (
   <Typography variant="body2" color="textSecondary" align="center">
     {"Copyright © "}
@@ -29,27 +28,27 @@ const Copyright = (
   </Typography>
 );
 
-export default function SignInPage(props) {
-  const {signIn} = useAuth();
-  const classes = useStyles(props);
-  const emailRef = useRef();
-  const passwordRef = useRef();
+export default function PasswordResetPage(props) {
+  const classes = useStyles();
   const [error, setError] = useState("")
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
   const [open, setOpen] = useState(false);
-
+  
+  const emailRef = useRef();
+  const {resetPassword} = useAuth();
+  
   async function handleSubmit(e) {
-    e.preventDefault()
-    setError("")
     setLoading(true)
-    await signIn(emailRef.current.value, passwordRef.current.value).then(() => {
-      setLoading(false);
-      setOpen(true);
-      navigate("/")
+    setMessage("")
+    
+    await resetPassword(emailRef.current.value).then(() => {
+      setMessage("Check your inbox for further instructions")
     }).catch((error)=> {
-      setError(error.message);
-      setLoading(false);
-      setOpen(true);
+      setError(error.message)
+    }).finally(() => {
+      setLoading(false)
+      setOpen(true)
     })
   }
 
@@ -63,11 +62,11 @@ export default function SignInPage(props) {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Password Reset
           </Typography>
           <Snackbar  autoHideDuration={3000} open={open} onClose={() => setOpen(false)} >
-            <MuiAlert elevation={6} variant="filled" onClose={() => setOpen(false)} severity="error" > 
-              {error}
+            <MuiAlert elevation={6} variant="filled" onClose={() => setOpen(false)} severity={error ? "error" : "success"} > 
+              {error ? error : message}
             </MuiAlert>
           </Snackbar>
           <form className={classes.form} onSubmit={handleSubmit}>
@@ -83,22 +82,6 @@ export default function SignInPage(props) {
               autoFocus
               inputRef={emailRef}
             />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              inputRef={passwordRef}
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
             <Button
               type="submit"
               fullWidth
@@ -108,12 +91,12 @@ export default function SignInPage(props) {
               onClick={(e) => handleSubmit(e)}
               disabled={loading}
             >
-              Sign In
+              Reset Password
             </Button>
             <Grid container>
               <Grid item xs>
-                <A href="/passwordResetPage" variant="body2">
-                  Forgot password?
+                <A href="/signInPage" variant="body2">
+                  Login
                 </A>
               </Grid>
               <Grid item>

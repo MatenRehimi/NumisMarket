@@ -3,14 +3,9 @@ import React, { useState, useEffect, createContext } from "react";
 const BasketContext = createContext();
 
 function BasketProvider(props) {
-  console.log("basketcontext render");
   const [basket, setBasket] = useState([]);
-  console.log(basket);
 
   useEffect(() => {
-    console.log("effect");
-    console.log(basket);
-    console.log("basketSubTotal:");
   }, [basket]);
 
   function addToBasket(product) {

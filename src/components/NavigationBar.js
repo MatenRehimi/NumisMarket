@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
@@ -14,12 +14,18 @@ import MoreIcon from "@material-ui/icons/MoreVert";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 import { BasketConsumer } from "../context/BasketContext";
 import { navigate } from "hookrouter";
+import {useAuth} from "../context/AuthContext"
+import { Snackbar } from "@material-ui/core";
+import MuiAlert from "@material-ui/lab/Alert";
 
 import { useStyles } from "./styles/NavigationBarStyle";
 
 export default function NavigationBar(props) {
   const isHomePage = props.isHomePage;
   const classes = useStyles(props);
+  const {signOut, currentUser} = useAuth();
+  const [error, setError] = useState("");
+  const [open, setOpen] = useState(false);
 
   //anchorEl is for the state of the account icon
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -50,6 +56,22 @@ export default function NavigationBar(props) {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+  function profileClick(event) {
+    handleMenuClose(event);
+    navigate("/profilePage");
+  }
+
+  async function handleLogOut(event) {
+    setError("")
+    await signOut().then(() => {
+      handleMenuClose(event);
+      navigate("/")
+    }).catch((error)=> {
+      setError(error.message);
+      setOpen(true);
+    })
+  }
+
   //Creating the buttons and attaching the listeners
   const menuId = "primary-search-account-menu";
   const renderMenu = (
@@ -63,9 +85,14 @@ export default function NavigationBar(props) {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-    </Menu>
+      <MenuItem onClick={(event) => profileClick(event)}>Profile</MenuItem>
+       <MenuItem onClick={(event) => handleLogOut(event)}>Log out</MenuItem>
+      <Snackbar  autoHideDuration={3000} open={open} onClose={() => setOpen(false)} >
+        <MuiAlert elevation={6} variant="filled" onClose={() => setOpen(false)} severity="error" > 
+          {error}
+        </MuiAlert>
+      </Snackbar> 
+    </Menu> 
   );
 
   const mobileMenuId = "primary-search-account-menu-mobile";
@@ -99,6 +126,7 @@ export default function NavigationBar(props) {
     </Menu>
   );
 
+  
   return (
     <div className={classes.grow}>
       <AppBar className={classes.appBarStyle} color="primary" position="static">
@@ -106,7 +134,7 @@ export default function NavigationBar(props) {
           <IconButton onClick={() => navigate("/")} color="inherit">
             <MonetizationOnIcon className={classes.logo} />
             <Typography className={classes.title} variant="h4" noWrap>
-              NumisMarket
+              NumisMarket 
             </Typography>
             {/* <img src={"/NumisMarket logo.png"} width={"220"} height={"70"} /> */}
           </IconButton>
@@ -125,22 +153,26 @@ export default function NavigationBar(props) {
                   inputProps={{ "aria-label": "search" }}
                 />
               </div>
+            </React.Fragment>)
+          }
               <div className={classes.grow} />
               <div className={classes.sectionDesktop}>
-                <IconButton
+                {!currentUser && <IconButton
                   color="inherit"
                   onClick={() => navigate("/signInPage")}
                 >
-                  <Typography variant="h5" noWrap>
+                  <Typography variant="h4" noWrap>
                     Login or Register
                   </Typography>
-                </IconButton>
+                </IconButton> }
                 <IconButton
                   onClick={() => navigate("/basketPage")}
                   aria-label="show 3 items in basket"
                   color="inherit"
                 >
-                  Basket
+                  <Typography variant="h4">
+                    Basket
+                  </Typography>
                   <BasketConsumer>
                     {(value) => {
                       return (
@@ -148,13 +180,13 @@ export default function NavigationBar(props) {
                           badgeContent={value.getBasketSize()}
                           color="secondary"
                         >
-                          <ShoppingBasketIcon style={{ fill: "white" }} />
+                          <ShoppingBasketIcon style={{ fill: "white", width:40, height:35 }} />
                         </Badge>
                       );
                     }}
                   </BasketConsumer>
                 </IconButton>
-                <IconButton
+                {currentUser && <IconButton
                   edge="end"
                   aria-label="account of current user"
                   aria-controls={menuId}
@@ -162,8 +194,8 @@ export default function NavigationBar(props) {
                   onClick={handleProfileMenuOpen}
                   color="inherit"
                 >
-                  <AccountCircle />
-                </IconButton>
+                  <AccountCircle style={{width:40, height:35}} />
+                </IconButton> }
               </div>
               <div className={classes.sectionMobile}>
                 <IconButton
@@ -176,13 +208,11 @@ export default function NavigationBar(props) {
                   <MoreIcon />
                 </IconButton>
               </div>
-            </React.Fragment>
-          )}
         </Toolbar>
       </AppBar>
-      {isHomePage ? (window.innerWidth <= 958 ? renderMobileMenu : null) : null}
-      {isHomePage ? (window.innerWidth > 958 ? renderMenu : null) : null}
-      {isHomePage ? renderMenu : null}
+        {isHomePage ? (window.innerWidth <= 958 ? renderMobileMenu : null) : null}
+        {isHomePage ? (window.innerWidth > 958 ? renderMenu : null) : null}
+        {renderMenu}
     </div>
   );
 }

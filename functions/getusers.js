@@ -1,16 +1,17 @@
+// import {auth} from "../src/context/AuthContext"
+
 exports.handler = function(event, context, callback) {
-    console.log(event.body);
-    const x = JSON.stringify(event.body)
-    console.log(x)
-    console.log(typeof(x))
-    console.log(x["email"])
+    
+    // let x = auth.createUserWithEmailAndPassword(email,password)
+    console.log(event.httpMethod)
     callback(null, {
         statusCode:200,
         headers: {
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Headers':
-                'Origin, X-Requested-With, Content-Type, Accept'
+            'Access-Control-Allow-Origin': 'http://localhost:3000',
+            'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
+            'Content-Type': 'application/json',
         },
-        body: JSON.stringify("hello world")
+        body: JSON.stringify("s")
     });
+ 
 }
