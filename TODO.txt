@@ -1,5 +1,3 @@
-1) Sort out profile page
-2) Make sure it works on Master. Push to master and sort env variables and API keys.
 3) Create SDK to communicate to firebase databases from netlify functions.
 4) Convert data into database code and pull from it.
 

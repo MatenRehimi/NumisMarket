@@ -1,4 +1,4 @@
-// import {auth} from "../src/context/AuthContext"
+import * as admin from 'firebase-admin';
 
 exports.handler = function(event, context, callback) {
     
