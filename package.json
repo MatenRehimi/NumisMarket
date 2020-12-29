@@ -27,7 +27,8 @@
   },
   "scripts": {
     "start": "concurrently \"react-scripts start\" \"netlify-lambda serve functions\"",
-    "build": "concurrently \"CI= react-scripts build\" \"netlify-lambda build functions\"",
+    "buildt": "concurrently \"CI= react-scripts build\" \"netlify-lambda build functions\"",
+    "build": "CI= react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
