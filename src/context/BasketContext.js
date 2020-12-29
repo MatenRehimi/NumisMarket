@@ -5,8 +5,7 @@ const BasketContext = createContext();
 function BasketProvider(props) {
   const [basket, setBasket] = useState([]);
 
-  useEffect(() => {
-  }, [basket]);
+  useEffect(() => {}, [basket]);
 
   function addToBasket(product) {
     if (

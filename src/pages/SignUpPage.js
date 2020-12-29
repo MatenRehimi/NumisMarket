@@ -1,5 +1,5 @@
-import React, {useRef, useState} from "react";
-import {useAuth} from "../context/AuthContext"
+import React, { useRef, useState } from "react";
+import { useAuth } from "../context/AuthContext";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -33,26 +33,28 @@ function Copyright() {
 
 export default function SignUpPage() {
   const classes = useStyles();
-  const {signUp} = useAuth();
+  const { signUp } = useAuth();
   const emailRef = useRef();
   const passwordRef = useRef();
-  const [error, setError] = useState("")
-  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
 
   async function handleSubmit(e) {
     e.preventDefault();
-    setError("")
-    setLoading(true)
-    await signUp(emailRef.current.value, passwordRef.current.value).then(() => {
-      setLoading(false)
-      setOpen(true)
-      navigate("/")
-    }).catch((error)=> {
-      setError(error.message)
-      setLoading(false);
-      setOpen(true);
-    })
+    setError("");
+    setLoading(true);
+    await signUp(emailRef.current.value, passwordRef.current.value)
+      .then(() => {
+        setLoading(false);
+        setOpen(true);
+        navigate("/");
+      })
+      .catch((error) => {
+        setError(error.message);
+        setLoading(false);
+        setOpen(true);
+      });
   }
 
   return (
@@ -67,12 +69,21 @@ export default function SignUpPage() {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-           <Snackbar  autoHideDuration={3000} open={open} onClose={() => setOpen(false)} >
-            <MuiAlert elevation={6} variant="filled" onClose={() => setOpen(false)} severity="error" > 
+          <Snackbar
+            autoHideDuration={3000}
+            open={open}
+            onClose={() => setOpen(false)}
+          >
+            <MuiAlert
+              elevation={6}
+              variant="filled"
+              onClose={() => setOpen(false)}
+              severity="error"
+            >
               {error}
             </MuiAlert>
           </Snackbar>
-          <form className={classes.form} onSubmit={handleSubmit} >
+          <form className={classes.form} onSubmit={handleSubmit}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
@@ -129,7 +140,7 @@ export default function SignUpPage() {
                   }
                   label="I want to receive inspiration, marketing promotions and updates via email."
                 />
-                 <Button
+                <Button
                   type="submit"
                   fullWidth
                   variant="contained"
@@ -142,7 +153,7 @@ export default function SignUpPage() {
                 </Button>
               </Grid>
             </Grid>
-           
+
             <Grid container justify="flex-end">
               <Grid item>
                 <A href="/signInPage" variant="body2">

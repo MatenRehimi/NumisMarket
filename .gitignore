@@ -18,9 +18,12 @@
 .env.test.local
 .env.production.local
 
+#netlify
+/functions
+
+#firebase SDK
+numismarket-425f0-firebase-adminsdk-p4o2j-15519ad3fc.json
 
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
-numismarket-425f0-firebase-adminsdk-p4o2j-15519ad3fc.json

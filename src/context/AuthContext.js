@@ -1,11 +1,11 @@
 import React, { useState, createContext, useEffect, useContext } from "react";
-import { auth } from '../firebase.js';
+import { auth } from "../firebase.js";
 
 const AuthContext = createContext();
 
 function AuthProvider(props) {
-  const [currentUser, setCurrentUser]= useState()
-  const [loading, setLoading] = useState(true)
+  const [currentUser, setCurrentUser] = useState();
+  const [loading, setLoading] = useState(true);
 
   // const sendData = async (email,password) => {
   //    fetch('http://localhost:9000/getusers', {
@@ -21,13 +21,13 @@ function AuthProvider(props) {
   //   })
   // }
 
-  function signUp(email,password) {
+  function signUp(email, password) {
     //
-    return auth.createUserWithEmailAndPassword(email,password);
+    return auth.createUserWithEmailAndPassword(email, password);
   }
 
-  function signIn(email,password) {
-    return auth.signInWithEmailAndPassword(email,password);
+  function signIn(email, password) {
+    return auth.signInWithEmailAndPassword(email, password);
   }
 
   function signOut() {
@@ -47,13 +47,12 @@ function AuthProvider(props) {
   }
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(user => {
-      setCurrentUser(user)
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setCurrentUser(user);
       setLoading(false);
-    })
-    return unsubscribe
-  }, [])
-
+    });
+    return unsubscribe;
+  }, []);
 
   return (
     <AuthContext.Provider
@@ -64,9 +63,9 @@ function AuthProvider(props) {
         signOut,
         resetPassword,
         updateEmail,
-        updatePassword
+        updatePassword,
       }}
-    > 
+    >
       {!loading && props.children}
     </AuthContext.Provider>
   );
@@ -76,5 +75,5 @@ const AuthConsumer = AuthContext.Consumer;
 export { AuthProvider, AuthConsumer, AuthContext };
 
 export function useAuth() {
-  return useContext(AuthContext)
+  return useContext(AuthContext);
 }

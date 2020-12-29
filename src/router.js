@@ -6,7 +6,7 @@ import PasswordResetPage from "./pages/PasswordResetPage.js";
 import ProductDetailsPage from "./pages/ProductDetailsPage.js";
 import BasketPage from "./pages/BasketPage.js";
 import ProfilePage from "./pages/ProfilePage.js";
-import UpdateProfilePage from "./pages/UpdateProfilePage.js"
+import UpdateProfilePage from "./pages/UpdateProfilePage.js";
 
 const routes = {
   "/": () => <HomePage />,
@@ -16,7 +16,7 @@ const routes = {
   "/productDetailsPage/:id": ({ id }) => <ProductDetailsPage productID={id} />,
   "/basketPage": () => <BasketPage />,
   "/profilePage": () => <ProfilePage />,
-  "/updateProfilePage": () => <UpdateProfilePage/>
+  "/updateProfilePage": () => <UpdateProfilePage />,
 };
 
 export default routes;

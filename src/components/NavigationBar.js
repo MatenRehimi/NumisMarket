@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
@@ -14,7 +14,7 @@ import MoreIcon from "@material-ui/icons/MoreVert";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 import { BasketConsumer } from "../context/BasketContext";
 import { navigate } from "hookrouter";
-import {useAuth} from "../context/AuthContext"
+import { useAuth } from "../context/AuthContext";
 import { Snackbar } from "@material-ui/core";
 import MuiAlert from "@material-ui/lab/Alert";
 
@@ -23,7 +23,7 @@ import { useStyles } from "./styles/NavigationBarStyle";
 export default function NavigationBar(props) {
   const isHomePage = props.isHomePage;
   const classes = useStyles(props);
-  const {signOut, currentUser} = useAuth();
+  const { signOut, currentUser } = useAuth();
   const [error, setError] = useState("");
   const [open, setOpen] = useState(false);
 
@@ -62,14 +62,16 @@ export default function NavigationBar(props) {
   }
 
   async function handleLogOut(event) {
-    setError("")
-    await signOut().then(() => {
-      handleMenuClose(event);
-      navigate("/")
-    }).catch((error)=> {
-      setError(error.message);
-      setOpen(true);
-    })
+    setError("");
+    await signOut()
+      .then(() => {
+        handleMenuClose(event);
+        navigate("/");
+      })
+      .catch((error) => {
+        setError(error.message);
+        setOpen(true);
+      });
   }
 
   //Creating the buttons and attaching the listeners
@@ -86,13 +88,22 @@ export default function NavigationBar(props) {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={(event) => profileClick(event)}>Profile</MenuItem>
-       <MenuItem onClick={(event) => handleLogOut(event)}>Log out</MenuItem>
-      <Snackbar  autoHideDuration={3000} open={open} onClose={() => setOpen(false)} >
-        <MuiAlert elevation={6} variant="filled" onClose={() => setOpen(false)} severity="error" > 
+      <MenuItem onClick={(event) => handleLogOut(event)}>Log out</MenuItem>
+      <Snackbar
+        autoHideDuration={3000}
+        open={open}
+        onClose={() => setOpen(false)}
+      >
+        <MuiAlert
+          elevation={6}
+          variant="filled"
+          onClose={() => setOpen(false)}
+          severity="error"
+        >
           {error}
         </MuiAlert>
-      </Snackbar> 
-    </Menu> 
+      </Snackbar>
+    </Menu>
   );
 
   const mobileMenuId = "primary-search-account-menu-mobile";
@@ -126,7 +137,6 @@ export default function NavigationBar(props) {
     </Menu>
   );
 
-  
   return (
     <div className={classes.grow}>
       <AppBar className={classes.appBarStyle} color="primary" position="static">
@@ -134,7 +144,7 @@ export default function NavigationBar(props) {
           <IconButton onClick={() => navigate("/")} color="inherit">
             <MonetizationOnIcon className={classes.logo} />
             <Typography className={classes.title} variant="h4" noWrap>
-              NumisMarket 
+              NumisMarket
             </Typography>
             {/* <img src={"/NumisMarket logo.png"} width={"220"} height={"70"} /> */}
           </IconButton>
@@ -153,66 +163,70 @@ export default function NavigationBar(props) {
                   inputProps={{ "aria-label": "search" }}
                 />
               </div>
-            </React.Fragment>)
-          }
-              <div className={classes.grow} />
-              <div className={classes.sectionDesktop}>
-                {!currentUser && <IconButton
-                  color="inherit"
-                  onClick={() => navigate("/signInPage")}
-                >
-                  <Typography variant="h4" noWrap>
-                    Login or Register
-                  </Typography>
-                </IconButton> }
-                <IconButton
-                  onClick={() => navigate("/basketPage")}
-                  aria-label="show 3 items in basket"
-                  color="inherit"
-                >
-                  <Typography variant="h4">
-                    Basket
-                  </Typography>
-                  <BasketConsumer>
-                    {(value) => {
-                      return (
-                        <Badge
-                          badgeContent={value.getBasketSize()}
-                          color="secondary"
-                        >
-                          <ShoppingBasketIcon style={{ fill: "white", width:40, height:35 }} />
-                        </Badge>
-                      );
-                    }}
-                  </BasketConsumer>
-                </IconButton>
-                {currentUser && <IconButton
-                  edge="end"
-                  aria-label="account of current user"
-                  aria-controls={menuId}
-                  aria-haspopup="true"
-                  onClick={handleProfileMenuOpen}
-                  color="inherit"
-                >
-                  <AccountCircle style={{width:40, height:35}} />
-                </IconButton> }
-              </div>
-              <div className={classes.sectionMobile}>
-                <IconButton
-                  aria-label="show more"
-                  aria-controls={mobileMenuId}
-                  aria-haspopup="true"
-                  onClick={handleMobileMenuOpen}
-                  color="inherit"
-                >
-                  <MoreIcon />
-                </IconButton>
-              </div>
+            </React.Fragment>
+          )}
+          <div className={classes.grow} />
+          <div className={classes.sectionDesktop}>
+            {!currentUser && (
+              <IconButton
+                color="inherit"
+                onClick={() => navigate("/signInPage")}
+              >
+                <Typography variant="h4" noWrap>
+                  Login or Register
+                </Typography>
+              </IconButton>
+            )}
+            <IconButton
+              onClick={() => navigate("/basketPage")}
+              aria-label="show 3 items in basket"
+              color="inherit"
+            >
+              <Typography variant="h4">Basket</Typography>
+              <BasketConsumer>
+                {(value) => {
+                  return (
+                    <Badge
+                      badgeContent={value.getBasketSize()}
+                      color="secondary"
+                    >
+                      <ShoppingBasketIcon
+                        style={{ fill: "white", width: 40, height: 35 }}
+                      />
+                    </Badge>
+                  );
+                }}
+              </BasketConsumer>
+            </IconButton>
+            {currentUser && (
+              <IconButton
+                edge="end"
+                aria-label="account of current user"
+                aria-controls={menuId}
+                aria-haspopup="true"
+                onClick={handleProfileMenuOpen}
+                color="inherit"
+              >
+                <AccountCircle style={{ width: 40, height: 35 }} />
+              </IconButton>
+            )}
+          </div>
+          <div className={classes.sectionMobile}>
+            <IconButton
+              aria-label="show more"
+              aria-controls={mobileMenuId}
+              aria-haspopup="true"
+              onClick={handleMobileMenuOpen}
+              color="inherit"
+            >
+              <MoreIcon />
+            </IconButton>
+          </div>
         </Toolbar>
       </AppBar>
-        {isHomePage ? (window.innerWidth <= 958 ? renderMobileMenu : null) : null}
-        {isHomePage ? (window.innerWidth > 958 ? renderMenu : null) : null}
-        {renderMenu}
+      {isHomePage ? (window.innerWidth <= 958 ? renderMobileMenu : null) : null}
+      {isHomePage ? (window.innerWidth > 958 ? renderMenu : null) : null}
+      {renderMenu}
     </div>
   );
 }

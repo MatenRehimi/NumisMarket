@@ -18,8 +18,6 @@ export default function BasketDataRow(props) {
     } else {
       setQuantity(event.target.valueAsNumber);
     }
-
-    // setQuantity(event.target.valueAsNumber);
   }
 
   return (

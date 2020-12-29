@@ -30,27 +30,29 @@ const Copyright = (
 );
 
 export default function SignInPage(props) {
-  const {signIn} = useAuth();
+  const { signIn } = useAuth();
   const classes = useStyles(props);
   const emailRef = useRef();
   const passwordRef = useRef();
-  const [error, setError] = useState("")
-  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
 
   async function handleSubmit(e) {
-    e.preventDefault()
-    setError("")
-    setLoading(true)
-    await signIn(emailRef.current.value, passwordRef.current.value).then(() => {
-      setLoading(false);
-      setOpen(true);
-      navigate("/")
-    }).catch((error)=> {
-      setError(error.message);
-      setLoading(false);
-      setOpen(true);
-    })
+    e.preventDefault();
+    setError("");
+    setLoading(true);
+    await signIn(emailRef.current.value, passwordRef.current.value)
+      .then(() => {
+        setLoading(false);
+        setOpen(true);
+        navigate("/");
+      })
+      .catch((error) => {
+        setError(error.message);
+        setLoading(false);
+        setOpen(true);
+      });
   }
 
   return (
@@ -65,8 +67,17 @@ export default function SignInPage(props) {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <Snackbar  autoHideDuration={3000} open={open} onClose={() => setOpen(false)} >
-            <MuiAlert elevation={6} variant="filled" onClose={() => setOpen(false)} severity="error" > 
+          <Snackbar
+            autoHideDuration={3000}
+            open={open}
+            onClose={() => setOpen(false)}
+          >
+            <MuiAlert
+              elevation={6}
+              variant="filled"
+              onClose={() => setOpen(false)}
+              severity="error"
+            >
               {error}
             </MuiAlert>
           </Snackbar>

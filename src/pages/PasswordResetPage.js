@@ -3,7 +3,7 @@ import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import { A} from "hookrouter";
+import { A } from "hookrouter";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
@@ -15,7 +15,6 @@ import { Snackbar } from "@material-ui/core";
 import MuiAlert from "@material-ui/lab/Alert";
 
 import { useStyles } from "./styles/SignInPageStyle.js";
-
 
 const Copyright = (
   <Typography variant="body2" color="textSecondary" align="center">
@@ -30,26 +29,29 @@ const Copyright = (
 
 export default function PasswordResetPage(props) {
   const classes = useStyles();
-  const [error, setError] = useState("")
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [open, setOpen] = useState(false);
-  
+
   const emailRef = useRef();
-  const {resetPassword} = useAuth();
-  
+  const { resetPassword } = useAuth();
+
   async function handleSubmit(e) {
-    setLoading(true)
-    setMessage("")
-    
-    await resetPassword(emailRef.current.value).then(() => {
-      setMessage("Check your inbox for further instructions")
-    }).catch((error)=> {
-      setError(error.message)
-    }).finally(() => {
-      setLoading(false)
-      setOpen(true)
-    })
+    setLoading(true);
+    setMessage("");
+
+    await resetPassword(emailRef.current.value)
+      .then(() => {
+        setMessage("Check your inbox for further instructions");
+      })
+      .catch((error) => {
+        setError(error.message);
+      })
+      .finally(() => {
+        setLoading(false);
+        setOpen(true);
+      });
   }
 
   return (
@@ -64,8 +66,17 @@ export default function PasswordResetPage(props) {
           <Typography component="h1" variant="h5">
             Password Reset
           </Typography>
-          <Snackbar  autoHideDuration={3000} open={open} onClose={() => setOpen(false)} >
-            <MuiAlert elevation={6} variant="filled" onClose={() => setOpen(false)} severity={error ? "error" : "success"} > 
+          <Snackbar
+            autoHideDuration={3000}
+            open={open}
+            onClose={() => setOpen(false)}
+          >
+            <MuiAlert
+              elevation={6}
+              variant="filled"
+              onClose={() => setOpen(false)}
+              severity={error ? "error" : "success"}
+            >
               {error ? error : message}
             </MuiAlert>
           </Snackbar>
