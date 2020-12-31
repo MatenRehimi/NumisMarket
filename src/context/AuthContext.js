@@ -7,23 +7,32 @@ function AuthProvider(props) {
   const [currentUser, setCurrentUser] = useState();
   const [loading, setLoading] = useState(true);
 
-  // const sendData = async (email,password) => {
-  //    fetch('http://localhost:9000/getusers', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify({"email":email,"password":password })
-  //   }).then(response => response.json())
-  //   .then(data => console.log("data: " + data))
-  //   .catch(error=> {
-  //     console.log("error: "+error)
-  //   })
-  // }
-
-  function signUp(email, password) {
-    //
-    return auth.createUserWithEmailAndPassword(email, password);
+  function signUp(email, password, firstName, lastName) {
+    return new Promise((resolve, reject) => {
+      auth
+        .createUserWithEmailAndPassword(email, password)
+        .then((cred) => {
+          fetch("/.netlify/functions/createUser", {
+            method: "POST",
+            body: JSON.stringify({
+              uid: cred.user.uid,
+              email: cred.user.email,
+              firstName,
+              lastName,
+            }),
+          })
+            .then((response) => response.json())
+            .then((resp) => console.log(resp))
+            .catch((error) => {
+              console.log("error: " + error);
+              reject(error);
+            });
+          resolve();
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
   }
 
   function signIn(email, password) {

@@ -22,7 +22,7 @@
 /functions
 
 #firebase SDK
-numismarket-425f0-firebase-adminsdk-p4o2j-15519ad3fc.json
+serviceAccountKey.json
 
 npm-debug.log*
 yarn-debug.log*

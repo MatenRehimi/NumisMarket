@@ -14,6 +14,7 @@
     "firebase": "^8.2.1",
     "firebase-admin": "^9.4.2",
     "hookrouter": "^1.2.3",
+    "http-proxy-middleware": "^1.0.6",
     "netlify-lambda": "^2.0.2",
     "node-sass": "^4.14.1",
     "react": "^16.13.1",
@@ -23,10 +24,11 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.1",
     "sass": "^1.26.10",
-    "typescript": "^3.9.7"
+    "typescript": "^3.9.7",
+    "webpack-node-externals": "^2.5.2"
   },
   "scripts": {
-    "local-start": "concurrently \"react-scripts start\" \"netlify-lambda serve functions\"",
+    "local-start": "concurrently \"react-scripts start\" \"netlify-lambda serve --config ./config/webpack.functions.js functions\"",
     "local-build": "concurrently \"CI= react-scripts build\" \"netlify-lambda build functions\"",
     "development-build": "CI= react-scripts build",
     "test": "react-scripts test",

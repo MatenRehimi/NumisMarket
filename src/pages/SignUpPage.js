@@ -36,6 +36,8 @@ export default function SignUpPage() {
   const { signUp } = useAuth();
   const emailRef = useRef();
   const passwordRef = useRef();
+  const firstNameRef = useRef();
+  const lastNameRef = useRef();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
@@ -44,7 +46,12 @@ export default function SignUpPage() {
     e.preventDefault();
     setError("");
     setLoading(true);
-    await signUp(emailRef.current.value, passwordRef.current.value)
+    await signUp(
+      emailRef.current.value,
+      passwordRef.current.value,
+      firstNameRef.current.value,
+      lastNameRef.current.value
+    )
       .then(() => {
         setLoading(false);
         setOpen(true);
@@ -95,6 +102,7 @@ export default function SignUpPage() {
                   id="firstName"
                   label="First Name"
                   autoFocus
+                  inputRef={firstNameRef}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -106,6 +114,7 @@ export default function SignUpPage() {
                   label="Last Name"
                   name="lastName"
                   autoComplete="lname"
+                  inputRef={lastNameRef}
                 />
               </Grid>
               <Grid item xs={12}>
