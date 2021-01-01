@@ -16,7 +16,7 @@ export default function Product(props) {
   const classes = useStyles(props);
   const [open, setOpen] = useState(false);
   const [severity, setSeverity] = useState("success");
-  const { id, title, img, price } = props.product;
+  const { id, title, image, price } = props.product;
 
   function handleTrueClick() {
     setOpen(true);
@@ -40,7 +40,7 @@ export default function Product(props) {
               className={classes.image}
               onClick={() => navigate("/productDetailsPage/" + id)}
             >
-              <img className={classes.img} alt={title} src={"/" + img} />
+              <img className={classes.img} alt={title} src={"/" + image} />
             </ButtonBase>
           </Grid>
           <Grid container direction="row" justify="space-evenly">

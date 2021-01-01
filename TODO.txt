@@ -1,8 +1,5 @@
-3) Create SDK to communicate to firebase databases from netlify functions.
-4) Convert data into database code and pull from it.
+1) Convert data into database code and pull from it.
 
 
-https://firebase.google.com/docs/auth/web/password-auth <-methods for web firebase
- 
-https://firebase.google.com/docs/admin/setup  <- firebase admin sdk to server
-https://jackwhiting.co.uk/posts/using-firebase-admin-sdk-with-netlify-lambda-functions/#structure <- firebase admin sdk guide
+
+//https://stackoverflow.com/questions/2827764/ecommerceshopping-cartwhere-should-i-store-shopping-cart-data-in-session-or
