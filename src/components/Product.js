@@ -45,7 +45,7 @@ export default function Product(props) {
           </Grid>
           <Grid container direction="row" justify="space-evenly">
             <Grid item xs={6}>
-              <Typography gutterBottom>{"£" + price}</Typography>
+              <Typography gutterBottom>{"£" + price.toFixed(2)}</Typography>
             </Grid>
             <Grid item xs={6}>
               <BasketConsumer>
