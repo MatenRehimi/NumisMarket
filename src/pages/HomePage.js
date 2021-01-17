@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import NavigationBar from "../components/NavigationBar.js";
 import ProductGrid from "../components/ProductGrid.js";
 import MetaTags from "react-meta-tags";
-import Grid from "@material-ui/core/Grid";
 
 async function getProducts() {
   const response = await fetch("/.netlify/functions/getProducts");
@@ -30,10 +29,8 @@ export default function HomePage() {
           <MetaTags>
             <meta name="viewport" content="width=device-width, initial-scale=0.8" />
           </MetaTags>
-          <Grid container item>
-            <NavigationBar isHomePage={true} setSearch={setSearch} />
-            <ProductGrid products={products} search={search} />
-          </Grid>
+          <NavigationBar isHomePage={true} setSearch={setSearch} />
+          <ProductGrid products={products} search={search} />
         </React.Fragment>
       )}
     </div>
