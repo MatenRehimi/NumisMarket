@@ -7,6 +7,7 @@ import ProductDetailsPage from "./pages/ProductDetailsPage.js";
 import BasketPage from "./pages/BasketPage.js";
 import ProfilePage from "./pages/ProfilePage.js";
 import UpdateProfilePage from "./pages/UpdateProfilePage.js";
+import CheckoutPage from "./pages/CheckoutPage.js";
 
 const routes = {
   "/": () => <HomePage />,
@@ -17,6 +18,7 @@ const routes = {
   "/basketPage": () => <BasketPage />,
   "/profilePage": () => <ProfilePage />,
   "/updateProfilePage": () => <UpdateProfilePage />,
+  "/checkoutPage": () => <CheckoutPage />,
 };
 
 export default routes;

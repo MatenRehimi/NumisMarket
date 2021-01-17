@@ -1,22 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
 import { StyledTableRow, StyledTableCell } from "./styles/BasketTableStyle";
 import { IconButton, TextField } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
-import { BasketConsumer } from "../context/BasketContext";
+import { useBasket } from "../context/BasketContext";
 
 export default function BasketDataRow(props) {
   const product = props.product;
-  const [quantity, setQuantity] = useState(product.numberInBasket);
+  const { removeFromBasket, decrementProductQuantity, incrementProductQuantity } = useBasket();
+  const previousQuantity = product.numberInBasket;
 
   function handleQuantityChange(event) {
-    console.log("hit");
-    product.numberInBasket = event.target.valueAsNumber;
-    if (event.target.valueAsNumber < 0) {
-      setQuantity(0);
-    } else if (event.target.valueAsNumber > product.quantity) {
-      setQuantity(product.quantity);
+    if (event.target.valueAsNumber < previousQuantity) {
+      decrementProductQuantity(product);
     } else {
-      setQuantity(event.target.valueAsNumber);
+      incrementProductQuantity(product);
     }
   }
 
@@ -29,15 +26,15 @@ export default function BasketDataRow(props) {
         {product.title}
       </StyledTableCell>
 
-      <StyledTableCell align="center">{"£" + product.price}</StyledTableCell>
+      <StyledTableCell align="center">{"£" + product.price.toFixed(2)}</StyledTableCell>
       <StyledTableCell align="center">
         <TextField
           onKeyDown={(e) => {
             e.preventDefault();
           }}
-          defaultValue={quantity}
+          defaultValue={product.numberInBasket}
           inputProps={{
-            min: "0",
+            min: 0,
             max: product.quantity,
           }}
           variant="outlined"
@@ -46,18 +43,12 @@ export default function BasketDataRow(props) {
         />
       </StyledTableCell>
       <StyledTableCell align="center">
-        {"£" + (quantity * product.price).toFixed(2)}
+        {"£" + (product.numberInBasket * product.price).toFixed(2)}
       </StyledTableCell>
       <StyledTableCell align="center">
-        <BasketConsumer>
-          {(value) => {
-            return (
-              <IconButton onClick={() => value.removeFromBasket(product)}>
-                <DeleteIcon />
-              </IconButton>
-            );
-          }}
-        </BasketConsumer>
+        <IconButton onClick={() => removeFromBasket(product)}>
+          <DeleteIcon />
+        </IconButton>
       </StyledTableCell>
     </StyledTableRow>
   );

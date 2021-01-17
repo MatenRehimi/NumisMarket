@@ -9,23 +9,28 @@ import MuiAlert from "@material-ui/lab/Alert";
 import { Snackbar } from "@material-ui/core";
 
 import { useStyles } from "./styles/ProductStyle.js";
-import { BasketConsumer } from "../context/BasketContext.js";
 import StyledButton from "./StyledButton.js";
+import { useBasket } from "../context/BasketContext";
 
 export default function Product(props) {
   const classes = useStyles(props);
   const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState("");
   const [severity, setSeverity] = useState("success");
   const { id, title, image, price } = props.product;
+  const { incrementProductQuantity } = useBasket();
 
-  function handleTrueClick() {
-    setOpen(true);
-    setSeverity("success");
-  }
+  function handleClick() {
+    const success = incrementProductQuantity(props.product);
 
-  function handleFalseClick() {
+    if (success) {
+      setSeverity("success");
+      setMessage("Added item to Basket!");
+    } else {
+      setSeverity("error");
+      setMessage("No stock remaining!");
+    }
     setOpen(true);
-    setSeverity("error");
   }
 
   return (
@@ -48,43 +53,26 @@ export default function Product(props) {
               <Typography gutterBottom>{"£" + price.toFixed(2)}</Typography>
             </Grid>
             <Grid item xs={6}>
-              <BasketConsumer>
-                {(value) => {
-                  return (
-                    <StyledButton
-                      onClick={() => {
-                        value.addToBasket(props.product)
-                          ? handleTrueClick()
-                          : handleFalseClick();
+              <StyledButton onClick={() => handleClick()}>
+                <Grid item container direction="row">
+                  <Grid item style={{ marginTop: "auto", marginBottom: "auto" }} xs={10}>
+                    <Typography
+                      style={{
+                        fontSize: 13,
                       }}
                     >
-                      <Grid item container direction="row">
-                        <Grid
-                          item
-                          style={{ marginTop: "auto", marginBottom: "auto" }}
-                          xs={10}
-                        >
-                          <Typography
-                            style={{
-                              fontSize: 13,
-                            }}
-                          >
-                            Add to basket
-                          </Typography>
-                        </Grid>
-                        <Grid item xs={2}>
-                          <ShoppingBasketIcon
-                            className={classes.shoppingBasketIcon}
-                          />
-                        </Grid>
-                      </Grid>
-                    </StyledButton>
-                  );
-                }}
-              </BasketConsumer>
+                      Add to basket
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={2}>
+                    <ShoppingBasketIcon className={classes.shoppingBasketIcon} />
+                  </Grid>
+                </Grid>
+              </StyledButton>
+
               <Snackbar
                 autoHideDuration={1250}
-                message="Item has been added"
+                message={message}
                 open={open}
                 onClose={() => setOpen(false)}
               >
@@ -94,9 +82,7 @@ export default function Product(props) {
                   onClose={() => setOpen(false)}
                   severity={severity}
                 >
-                  {severity === "success"
-                    ? "Added item to Basket!"
-                    : "No stock remaining!"}
+                  {message}
                 </MuiAlert>
               </Snackbar>
             </Grid>

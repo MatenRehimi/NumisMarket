@@ -22,6 +22,7 @@ import { useStyles } from "./styles/NavigationBarStyle";
 
 export default function NavigationBar(props) {
   const isHomePage = props.isHomePage;
+  const setSearch = props.setSearch;
   const classes = useStyles(props);
   const { signOut, currentUser } = useAuth();
   const [error, setError] = useState("");
@@ -39,7 +40,7 @@ export default function NavigationBar(props) {
 
   //Fired when clicking account
   const handleProfileMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
+    setAnchorEl(event.target.value);
   };
 
   const handleMobileMenuClose = () => {
@@ -89,17 +90,8 @@ export default function NavigationBar(props) {
     >
       <MenuItem onClick={(event) => profileClick(event)}>Profile</MenuItem>
       <MenuItem onClick={(event) => handleLogOut(event)}>Log out</MenuItem>
-      <Snackbar
-        autoHideDuration={3000}
-        open={open}
-        onClose={() => setOpen(false)}
-      >
-        <MuiAlert
-          elevation={6}
-          variant="filled"
-          onClose={() => setOpen(false)}
-          severity="error"
-        >
+      <Snackbar autoHideDuration={3000} open={open} onClose={() => setOpen(false)}>
+        <MuiAlert elevation={6} variant="filled" onClose={() => setOpen(false)} severity="error">
           {error}
         </MuiAlert>
       </Snackbar>
@@ -160,6 +152,7 @@ export default function NavigationBar(props) {
                     root: classes.inputRoot,
                     input: classes.inputInput,
                   }}
+                  onChange={(e) => setSearch(e.target.value)}
                   inputProps={{ "aria-label": "search" }}
                 />
               </div>
@@ -168,10 +161,7 @@ export default function NavigationBar(props) {
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             {!currentUser && (
-              <IconButton
-                color="inherit"
-                onClick={() => navigate("/signInPage")}
-              >
+              <IconButton color="inherit" onClick={() => navigate("/signInPage")}>
                 <Typography variant="h4" noWrap>
                   Login or Register
                 </Typography>
@@ -186,13 +176,8 @@ export default function NavigationBar(props) {
               <BasketConsumer>
                 {(value) => {
                   return (
-                    <Badge
-                      badgeContent={value.getBasketSize()}
-                      color="secondary"
-                    >
-                      <ShoppingBasketIcon
-                        style={{ fill: "white", width: 40, height: 35 }}
-                      />
+                    <Badge badgeContent={value.getBasketSize()} color="secondary">
+                      <ShoppingBasketIcon style={{ fill: "white", width: 40, height: 35 }} />
                     </Badge>
                   );
                 }}

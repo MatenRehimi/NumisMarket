@@ -13,6 +13,7 @@ async function getProducts() {
 export default function HomePage() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     const data = getProducts();
@@ -27,14 +28,11 @@ export default function HomePage() {
       {!loading && (
         <React.Fragment>
           <MetaTags>
-            <meta
-              name="viewport"
-              content="width=device-width, initial-scale=0.8"
-            />
+            <meta name="viewport" content="width=device-width, initial-scale=0.8" />
           </MetaTags>
           <Grid container item>
-            <NavigationBar isHomePage={true} />
-            <ProductGrid products={products} />
+            <NavigationBar isHomePage={true} setSearch={setSearch} />
+            <ProductGrid products={products} search={search} />
           </Grid>
         </React.Fragment>
       )}

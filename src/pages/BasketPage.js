@@ -11,18 +11,13 @@ export default function BasketPage(props) {
       <CssBaseline />
       <center>
         <h1>Shopping Basket</h1>
+
+        <BasketConsumer>
+          {(value) => {
+            return <BasketTable basket={value.basket} getBasketSize={value.getBasketSize} />;
+          }}
+        </BasketConsumer>
       </center>
-      <BasketConsumer>
-        {(value) => {
-          console.log(value.basket);
-          return (
-            <BasketTable
-              basket={value.basket}
-              getBasketSize={value.getBasketSize}
-            />
-          );
-        }}
-      </BasketConsumer>
     </React.Fragment>
   );
 }

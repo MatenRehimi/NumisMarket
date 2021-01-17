@@ -1,4 +1,8 @@
-1) Convert data into database code and pull from it.
+1) Saving basket data
+    1.1) If current user is present -> store data in DB, load data from DB, checkout
+    1.2) If current user is not present -> store data in localstorage, load data from localstorage, user must make an account
+    1.3) When made, LS must be synced to DB then linked to checkout page
+    1.4) See link for flow diagram
 
 
 
