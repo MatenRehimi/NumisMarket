@@ -25,6 +25,7 @@ export default function NavigationBar(props) {
   const setSearch = props.setSearch;
   const classes = useStyles(props);
   const { signOut, currentUser } = useAuth();
+  console.log(currentUser);
   const [error, setError] = useState("");
   const [open, setOpen] = useState(false);
 
@@ -40,7 +41,8 @@ export default function NavigationBar(props) {
 
   //Fired when clicking account
   const handleProfileMenuOpen = (event) => {
-    setAnchorEl(event.target.value);
+    console.log("hit");
+    setAnchorEl(event.currentTarget);
   };
 
   const handleMobileMenuClose = () => {
