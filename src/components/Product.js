@@ -43,13 +43,14 @@ export default function Product(props) {
           <Grid item xs={12}>
             <ButtonBase
               className={classes.image}
-              onClick={() => navigate("/productDetailsPage/" + id)}
+              onClick={() => navigate("/productDetailsPage", false, { data: 5 })}
+              // onClick={() => navigate("/productDetailsPage/" + id)}
             >
               <img className={classes.img} alt={title} src={"/" + image} />
             </ButtonBase>
           </Grid>
           <Grid container direction="row" justify="space-evenly">
-            <Grid item xs={6}>
+            <Grid item xs={6} className={classes.price}>
               <Typography gutterBottom>{"£" + price.toFixed(2)}</Typography>
             </Grid>
             <Grid item xs={6}>

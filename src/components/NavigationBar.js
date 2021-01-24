@@ -17,6 +17,7 @@ import { navigate } from "hookrouter";
 import { useAuth } from "../context/AuthContext";
 import { Snackbar } from "@material-ui/core";
 import MuiAlert from "@material-ui/lab/Alert";
+import Grid from "@material-ui/core/Grid";
 
 import { useStyles } from "./styles/NavigationBarStyle";
 
@@ -25,14 +26,13 @@ export default function NavigationBar(props) {
   const setSearch = props.setSearch;
   const classes = useStyles(props);
   const { signOut, currentUser } = useAuth();
-  console.log(currentUser);
   const [error, setError] = useState("");
   const [open, setOpen] = useState(false);
 
   //anchorEl is for the state of the account icon
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
   //mobileMoreAnchorEl is for the state of the opened window when account is clicked
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -41,7 +41,6 @@ export default function NavigationBar(props) {
 
   //Fired when clicking account
   const handleProfileMenuOpen = (event) => {
-    console.log("hit");
     setAnchorEl(event.currentTarget);
   };
 
@@ -131,60 +130,71 @@ export default function NavigationBar(props) {
     </Menu>
   );
 
+  const renderSearchBar = (
+    <Grid item xs={5} className={classes.item1}>
+      <div className={classes.search}>
+        <div className={classes.searchIcon}>
+          <SearchIcon />
+        </div>
+        <InputBase
+          placeholder="Search…"
+          classes={{
+            root: classes.inputRoot,
+            input: classes.inputInput,
+          }}
+          onChange={(e) => setSearch(e.target.value)}
+          inputProps={{ "aria-label": "search" }}
+        />
+      </div>
+    </Grid>
+  );
+
   return (
     <div className={classes.grow}>
       <AppBar className={classes.appBarStyle} color="primary" position="static">
         <Toolbar>
-          <IconButton onClick={() => navigate("/")} color="inherit">
-            <MonetizationOnIcon className={classes.logo} />
-            <Typography className={classes.title} variant="h4" noWrap>
-              NumisMarket
-            </Typography>
-            {/* <img src={"/NumisMarket logo.png"} width={"220"} height={"70"} /> */}
-          </IconButton>
-          {isHomePage && (
-            <React.Fragment>
-              <div className={classes.search}>
-                <div className={classes.searchIcon}>
-                  <SearchIcon />
-                </div>
-                <InputBase
-                  placeholder="Search…"
-                  classes={{
-                    root: classes.inputRoot,
-                    input: classes.inputInput,
-                  }}
-                  onChange={(e) => setSearch(e.target.value)}
-                  inputProps={{ "aria-label": "search" }}
-                />
-              </div>
-            </React.Fragment>
-          )}
-          <div className={classes.grow} />
-          <div className={classes.sectionDesktop}>
-            {!currentUser && (
-              <IconButton color="inherit" onClick={() => navigate("/signInPage")}>
-                <Typography variant="h4" noWrap>
-                  Login or Register
+          <Grid container item xs={6}>
+            <Grid item xs={7}>
+              <IconButton onClick={() => navigate("/")} color="inherit">
+                <MonetizationOnIcon className={classes.logo} />
+                <Typography className={classes.title} variant="h4" noWrap>
+                  NumisMarket
                 </Typography>
+                {/* <img src={"/NumisMarket logo.png"} width={"220"} height={"70"} /> */}
               </IconButton>
+            </Grid>
+            {isHomePage && renderSearchBar}
+          </Grid>
+          <Grid container item xs={6} direction="row" justify="flex-end">
+            {/* <div className={classes.sectionDesktop}> */}
+            {!currentUser && (
+              <Grid item xs={6}>
+                <IconButton color="inherit" onClick={() => navigate("/signInPage")}>
+                  <Typography variant="h4" noWrap>
+                    Login or Register
+                  </Typography>
+                </IconButton>
+              </Grid>
             )}
-            <IconButton
-              onClick={() => navigate("/basketPage")}
-              aria-label="show 3 items in basket"
-              color="inherit"
-            >
-              <Typography variant="h4">Basket</Typography>
-              <BasketConsumer>
-                {(value) => {
-                  return (
-                    <Badge badgeContent={value.getBasketSize()} color="secondary">
-                      <ShoppingBasketIcon style={{ fill: "white", width: 40, height: 35 }} />
-                    </Badge>
-                  );
-                }}
-              </BasketConsumer>
-            </IconButton>
+            <Grid item>
+              <IconButton
+                onClick={() => navigate("/basketPage")}
+                aria-label="show 3 items in basket"
+                color="inherit"
+              >
+                <Typography variant="h4">Basket</Typography>
+                <BasketConsumer>
+                  {(value) => {
+                    return (
+                      <Badge badgeContent={value.getBasketSize()} color="secondary">
+                        <ShoppingBasketIcon style={{ fill: "white", width: 40, height: 35 }} />
+                      </Badge>
+                    );
+                  }}
+                </BasketConsumer>
+              </IconButton>
+            </Grid>
+
             {currentUser && (
               <IconButton
                 edge="end"
@@ -197,7 +207,8 @@ export default function NavigationBar(props) {
                 <AccountCircle style={{ width: 40, height: 35 }} />
               </IconButton>
             )}
-          </div>
+            {/* </div> */}
+          </Grid>
           <div className={classes.sectionMobile}>
             <IconButton
               aria-label="show more"
@@ -213,7 +224,6 @@ export default function NavigationBar(props) {
       </AppBar>
       {isHomePage ? (window.innerWidth <= 958 ? renderMobileMenu : null) : null}
       {isHomePage ? (window.innerWidth > 958 ? renderMenu : null) : null}
-      {renderMenu}
     </div>
   );
 }

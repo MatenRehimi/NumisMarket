@@ -90,7 +90,7 @@ function BasketProvider(props) {
     }
     const productInBasket = basket.find((item) => item.id === product.id);
     if (productInBasket) {
-      if (productInBasket.numberInBasket + 1 >= productInBasket.quantity) {
+      if (productInBasket.numberInBasket > productInBasket.quantity) {
         return false;
       }
       productInBasket.numberInBasket++;

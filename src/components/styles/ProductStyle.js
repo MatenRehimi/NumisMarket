@@ -26,6 +26,11 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(0.4),
     marginBottom: "auto",
   },
+
+  price: {
+    marginTop: "auto",
+    marginBottom: "auto",
+  },
 }));
 
 export { useStyles };

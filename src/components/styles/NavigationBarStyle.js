@@ -1,9 +1,6 @@
 import { fade, makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
-  grow: {
-    flexGrow: 1,
-  },
   appBarStyle: {
     background: "#2278CF",
   },
@@ -17,6 +14,13 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up("sm")]: {
       fontSize: "3rem",
     },
+    marginTop: "auto",
+    marginBottom: "auto",
+  },
+
+  item1: {
+    marginTop: "auto",
+    marginBottom: "auto",
   },
   search: {
     position: "relative",
@@ -28,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2),
     marginLeft: 0,
     width: "100%",
+    alignItems: "center",
     [theme.breakpoints.up("sm")]: {
       marginLeft: theme.spacing(3),
       width: "auto",
@@ -44,20 +49,23 @@ const useStyles = makeStyles((theme) => ({
   },
   inputRoot: {
     color: "inherit",
+    width: "100%",
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
+    //vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
     transition: theme.transitions.create("width"),
     width: "100%",
     [theme.breakpoints.up("md")]: {
-      width: "20ch",
+      width: "100%",
     },
   },
   sectionDesktop: {
     padding: theme.spacing(1, 1, 1, 0), //creates consistent spacing between elements of UI
     display: "none",
+    marginTop: "auto",
+    marginBottom: "auto",
     [theme.breakpoints.up("md")]: {
       display: "flex",
     },

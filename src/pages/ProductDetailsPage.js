@@ -5,29 +5,34 @@ import NotFoundPage from "./NotFoundPage.js";
 import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import MuiAlert from "@material-ui/lab/Alert";
-import { BasketConsumer } from "../context/BasketContext";
 import { navigate } from "hookrouter";
 
 import { useStyles } from "./styles/ProductDetailsPageStyle";
 import { Grid, Snackbar } from "@material-ui/core";
 import StyledButton from "../components/StyledButton.js";
+import { useBasket } from "../context/BasketContext";
 
 export default function ProductDetailsPage(props) {
   const [open, setOpen] = useState(false);
   const [severity, setSeverity] = useState("success");
+  const [message, setMessage] = useState("");
   const classes = useStyles(props);
-  const product = storeProducts.find(
-    (item) => item.id === parseInt(props.productID)
-  );
+  const { incrementProductQuantity } = useBasket();
+  console.log(props);
+  console.log("hi");
+  const product = props.data;
 
-  function handleTrueClick() {
-    setOpen(true);
-    setSeverity("success");
-  }
+  function handleClick() {
+    const success = incrementProductQuantity(product);
 
-  function handleFalseClick() {
+    if (success) {
+      setSeverity("success");
+      setMessage("Added item to Basket!");
+    } else {
+      setSeverity("error");
+      setMessage("No stock remaining!");
+    }
     setOpen(true);
-    setSeverity("error");
   }
 
   if (product) {
@@ -56,25 +61,17 @@ export default function ProductDetailsPage(props) {
                   <h2 className={classes.price}>{"Price: £" + price}</h2>
 
                   <p>Description: {info}</p>
-                  <BasketConsumer>
-                    {(value) => {
-                      return (
-                        <StyledButton
-                          fullWidth
-                          className={classes.addBasketButton}
-                          onClick={() => {
-                            value.addToBasket(product)
-                              ? handleTrueClick()
-                              : handleFalseClick();
-                          }}
-                          message="Add to basket"
-                        />
-                      );
-                    }}
-                  </BasketConsumer>
+
+                  <StyledButton
+                    fullWidth
+                    className={classes.addBasketButton}
+                    onClick={() => handleClick()}
+                    message="Add to basket"
+                  />
+
                   <Snackbar
                     autoHideDuration={1250}
-                    message="Item has been added"
+                    message={message}
                     open={open}
                     onClose={() => setOpen(false)}
                   >
@@ -84,9 +81,7 @@ export default function ProductDetailsPage(props) {
                       onClose={() => setOpen(false)}
                       severity={severity}
                     >
-                      {severity === "success"
-                        ? "Added item to Basket!"
-                        : "No stock remaining!"}
+                      {message}
                     </MuiAlert>
                   </Snackbar>
 
@@ -107,6 +102,6 @@ export default function ProductDetailsPage(props) {
       </div>
     );
   } else {
-    return <NotFoundPage />;
+    return <h1>hello</h1>;
   }
 }
