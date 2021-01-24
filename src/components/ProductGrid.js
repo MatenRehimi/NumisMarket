@@ -8,7 +8,7 @@ export default function ProductGrid(props) {
   const products = props.products;
   const search = props.search;
   const filteredProducts = products.filter((product) =>
-    product.title.toLocaleLowerCase().includes(search)
+    product.title.toLocaleLowerCase().includes(search.toLocaleLowerCase())
   );
 
   return (

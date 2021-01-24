@@ -61,15 +61,15 @@ const useStyles = makeStyles((theme) => ({
       width: "100%",
     },
   },
-  sectionDesktop: {
-    padding: theme.spacing(1, 1, 1, 0), //creates consistent spacing between elements of UI
-    display: "none",
-    marginTop: "auto",
-    marginBottom: "auto",
-    [theme.breakpoints.up("md")]: {
-      display: "flex",
-    },
-  },
+  // sectionDesktop: {
+  //   padding: theme.spacing(1, 1, 1, 0), //creates consistent spacing between elements of UI
+  //   display: "none",
+  //   marginTop: "auto",
+  //   marginBottom: "auto",
+  //   [theme.breakpoints.up("md")]: {
+  //     display: "flex",
+  //   },
+  // },
   sectionMobile: {
     display: "flex",
     [theme.breakpoints.up("md")]: {

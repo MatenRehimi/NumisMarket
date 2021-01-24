@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { storeProducts } from "../data.js";
+import React, { useState, useEffect } from "react";
 import NavigationBar from "../components/NavigationBar";
 import NotFoundPage from "./NotFoundPage.js";
 import Container from "@material-ui/core/Container";
@@ -12,15 +11,31 @@ import { Grid, Snackbar } from "@material-ui/core";
 import StyledButton from "../components/StyledButton.js";
 import { useBasket } from "../context/BasketContext";
 
+async function getProduct(id) {
+  const response = await fetch("/.netlify/functions/findProduct", {
+    method: "POST",
+    body: JSON.stringify({
+      id: id,
+    }),
+  });
+  const data = await response.json();
+  return data;
+}
+
 export default function ProductDetailsPage(props) {
+  const [product, setProduct] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   const [open, setOpen] = useState(false);
   const [severity, setSeverity] = useState("success");
   const [message, setMessage] = useState("");
   const classes = useStyles(props);
   const { incrementProductQuantity } = useBasket();
-  console.log(props);
-  console.log("hi");
-  const product = props.data;
+
+  useEffect(() => {
+    const data = getProduct(props.id);
+    data.then((x) => setProduct(x.product)).then(() => setLoading(false));
+  }, [props.id]);
 
   function handleClick() {
     const success = incrementProductQuantity(product);
@@ -35,8 +50,12 @@ export default function ProductDetailsPage(props) {
     setOpen(true);
   }
 
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   if (product) {
-    const { title, img, price, info } = product;
+    const { title, image, price, info } = product;
     return (
       <div>
         <NavigationBar isHomePage={false} />
@@ -51,7 +70,7 @@ export default function ProductDetailsPage(props) {
                     width={400}
                     height={400}
                     alt={title}
-                    src={"/" + img}
+                    src={"/" + image}
                   />
                 </center>
               </Grid>
@@ -102,6 +121,6 @@ export default function ProductDetailsPage(props) {
       </div>
     );
   } else {
-    return <h1>hello</h1>;
+    return <NotFoundPage />;
   }
 }

@@ -43,7 +43,7 @@ export default function Product(props) {
           <Grid item xs={12}>
             <ButtonBase
               className={classes.image}
-              onClick={() => navigate("/productDetailsPage", false, { data: 5 })}
+              onClick={() => navigate("/productDetailsPage/" + id)}
               // onClick={() => navigate("/productDetailsPage/" + id)}
             >
               <img className={classes.img} alt={title} src={"/" + image} />

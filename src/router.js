@@ -14,7 +14,7 @@ const routes = {
   "/signInPage": () => <SignInPage />,
   "/signUpPage": () => <SignUpPage />,
   "/passwordResetPage": () => <PasswordResetPage />,
-  "/productDetailsPage": (product) => <ProductDetailsPage product={product} />,
+  "/productDetailsPage/:id": ({ id }) => <ProductDetailsPage id={id} />,
   "/basketPage": () => <BasketPage />,
   "/profilePage": () => <ProfilePage />,
   "/updateProfilePage": () => <UpdateProfilePage />,
